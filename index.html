@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pearson Versant 4 Skills Essential Test (4SET) Interactive Platform</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            pearson: {
+              navy: '#002B49',
+              darkNavy: '#001A2C',
+              blue: '#007AA5',
+              lightBlue: '#009FD9',
+              teal: '#00877C',
+              slate: '#4A5568',
+              lightGray: '#F4F6F9',
+              border: '#CBD5E1',
+              accent: '#E36900'
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    @media print {
+      body { background: white !important; color: black !important; }
+      .no-print { display: none !important; }
+      .print-only { display: block !important; }
+      .score-card-sheet { box-shadow: none !important; border: 1px solid #ccc !important; }
+    }
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.96); opacity: 0.8; }
+      50% { transform: scale(1.18); opacity: 0.15; }
+      100% { transform: scale(0.96); opacity: 0.8; }
+    }
+    .pulse-ring-effect { animation: pulse-ring 2.2s infinite ease-in-out; }
+    .countdown-circle {
+      transition: stroke-dashoffset 1s linear;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-pearson-blue selection:text-white">
+
+  <header class="bg-pearson-navy text-white shadow-md border-b-4 border-pearson-teal sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="bg-white text-pearson-navy px-2.5 py-1 rounded font-extrabold text-sm sm:text-base tracking-wider shadow">
+          4SET
+        </div>
+        <div>
+          <h1 class="text-sm sm:text-base font-bold tracking-tight leading-tight flex items-center gap-1.5">
+            Pearson Versant 4 Skills Essential Test
+            <span class="hidden md:inline-block text-[11px] font-normal text-slate-300 border-l border-slate-600 pl-2">Practice & Diagnostic Simulator</span>
+          </h1>
+          <p class="text-[11px] text-slate-300 font-mono">Official GSE 10–90 &bull; CEFR A1–C2 &bull; Multi-Accent Engine</p>
+        </div>
+      </div>
+
+      <!-- Live Stream Status & Mode Actions -->
+      <div class="flex items-center space-x-3">
+        <div id="mic-status-pill" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs">
+          <span id="mic-pill-dot" class="w-2 h-2 rounded-full bg-amber-400"></span>
+          <span id="mic-pill-text" class="text-[11px] text-slate-300 font-mono">Mic: Standby</span>
+        </div>
+        <button onclick="toggleSectionDrillModal()" class="px-2.5 py-1 text-xs bg-pearson-blue hover:bg-pearson-lightBlue text-white rounded font-medium transition flex items-center gap-1 shadow-sm">
+          <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Section Drill</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Localhost & Secure Origin Warning Helper -->
+  <div id="file-protocol-warning" class="hidden bg-amber-500 text-white text-xs px-4 py-2 font-medium shadow-inner flex items-center justify-center gap-2">
+    <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+    <span>Running under <code>file:///</code>. Click <strong>"Allow while visiting the site"</strong> once on the mic check. Use localhost or HTTPS for 100% zero-popup mode.</span>
+  </div>
+
+  <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 md:p-8 flex flex-col justify-center">
+
+    <section id="screen-welcome" class="bg-white rounded-xl shadow-sm border border-pearson-border overflow-hidden p-6 sm:p-8">
+      <div class="border-b border-slate-200 pb-5 mb-6">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-semibold bg-blue-100 text-blue-900 uppercase tracking-wider">Acoustic Calibration & Setup</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Official Versant 4SET Readiness</h2>
+          </div>
+          <div class="text-right">
+            <span class="text-xs text-slate-500 block">Accent Synthesis</span>
+            <span class="text-xs font-bold text-pearson-teal font-mono">US 🇺🇸 &bull; UK 🇬🇧 &bull; AU 🇦🇺</span>
+          </div>
+        </div>
+        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+          The Pearson Versant 4SET evaluates <strong class="text-slate-900">Speaking, Listening, Reading, and Writing</strong> in 6 authentic sections. 
+          Prompt audio uses native <strong class="text-slate-800">American, British, and Australian accents</strong>.
+          Microphone access is authorized once here and maintained continuously so your scholars encounter zero interruptions.
+        </p>
+      </div>
+
+      <!-- Candidate Metadata Configuration -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Scholar / Candidate Name</label>
+          <input type="text" id="candidate-name" placeholder="e.g. Maya Chen / Candidate ID 8412" value="Candidate Scholar" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-pearson-blue outline-none transition">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Target Proficiency Benchmark</label>
+          <select id="target-benchmark" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-pearson-blue outline-none bg-white">
+            <option value="B2">CEFR B2 / GSE 59–75 (Corporate Ready — Standard Benchmark)</option>
+            <option value="B1">CEFR B1 / GSE 43–58 (Intermediate / Threshold)</option>
+            <option value="C1">CEFR C1 / GSE 76–84 (Advanced Professional / High Fluency)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Audio & Multi-Accent Calibration Workspace -->
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 mb-6">
+        <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+          <i data-lucide="headphones" class="w-4 h-4 text-pearson-blue"></i>
+          Headset, Tone & Multi-Accent Calibration (Authorize Once)
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Multi-Accent Voice Preview -->
+          <div class="bg-white p-4 rounded-lg border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm font-bold text-slate-800">1. Speaker & Accent Audio Test</span>
+                <span id="speaker-test-badge" class="text-[11px] px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-medium">Ready</span>
+              </div>
+              <p class="text-xs text-slate-500 mb-3 leading-relaxed">
+                Test the official 880Hz start tone and sample the authentic regional accents:
+              </p>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2">
+                <button onclick="playBeepTone(880, 0.35)" class="flex-1 px-2.5 py-2 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded transition flex items-center justify-center gap-1 border border-slate-300">
+                  <i data-lucide="bell" class="w-3.5 h-3.5"></i> 880Hz Tone
+                </button>
+                <button onclick="testAccentVoice('en-US')" class="flex-1 px-2.5 py-2 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded transition flex items-center justify-center gap-1 border border-slate-300">
+                  🇺🇸 Test US
+                </button>
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="testAccentVoice('en-GB')" class="flex-1 px-2.5 py-2 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded transition flex items-center justify-center gap-1 border border-slate-300">
+                  🇬🇧 Test UK
+                </button>
+                <button onclick="testAccentVoice('en-AU')" class="flex-1 px-2.5 py-2 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded transition flex items-center justify-center gap-1 border border-slate-300">
+                  🇦🇺 Test AU
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Continuous Microphone Authorization -->
+          <div class="bg-white p-4 rounded-lg border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm font-bold text-slate-800">2. Persistent Microphone Lock</span>
+                <span id="mic-test-badge" class="text-[11px] px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-medium">Pending Lock</span>
+              </div>
+              <p class="text-xs text-slate-500 mb-2 leading-relaxed">
+                Click <strong>Lock Mic Stream</strong>. This maintains an open audio channel across all speaking items so no popup interruptions occur.
+              </p>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <button id="lock-mic-btn" onclick="initializeContinuousAudio()" class="px-3.5 py-2 text-xs font-bold bg-pearson-teal hover:bg-teal-700 text-white rounded transition flex items-center gap-1.5 shadow-sm">
+                  <i data-lucide="mic" class="w-3.5 h-3.5"></i>
+                  <span>Lock Mic Stream</span>
+                </button>
+                <!-- Decibel Level Meter -->
+                <div id="calibration-meter" class="flex-1 flex items-center justify-center space-x-1 h-8 bg-slate-100 rounded px-2">
+                  <div class="calib-bar w-1.5 bg-slate-300 h-2 rounded transition-all"></div>
+                  <div class="calib-bar w-1.5 bg-slate-300 h-2 rounded transition-all"></div>
+                  <div class="calib-bar w-1.5 bg-slate-300 h-2 rounded transition-all"></div>
+                  <div class="calib-bar w-1.5 bg-slate-300 h-2 rounded transition-all"></div>
+                  <div class="calib-bar w-1.5 bg-slate-300 h-2 rounded transition-all"></div>
+                  <div class="calib-bar w-1.5 bg-slate-300 h-2 rounded transition-all"></div>
+                  <div class="calib-bar w-1.5 bg-slate-300 h-2 rounded transition-all"></div>
+                </div>
+              </div>
+              <p id="mic-live-label" class="text-[11px] text-slate-400 font-mono mt-1.5 truncate">Stream inactive. Click Lock Mic Stream.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2.5">Official Pearson 4SET Timers & Rules</h4>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 text-center text-xs">
+          <div class="p-2.5 rounded-lg bg-blue-50/70 border border-blue-100">
+            <span class="block font-bold text-pearson-blue">Part A</span>
+            <span class="text-slate-800 font-semibold">Repeats</span>
+            <span class="block text-[11px] font-mono font-bold text-teal-700 mt-1">15s response</span>
+            <span class="block text-[10px] text-slate-500">6s speech onset</span>
+          </div>
+          <div class="p-2.5 rounded-lg bg-blue-50/70 border border-blue-100">
+            <span class="block font-bold text-pearson-blue">Part B</span>
+            <span class="text-slate-800 font-semibold">Sentence Builds</span>
+            <span class="block text-[11px] font-mono font-bold text-teal-700 mt-1">15s response</span>
+            <span class="block text-[10px] text-slate-500">8s speech onset</span>
+          </div>
+          <div class="p-2.5 rounded-lg bg-blue-50/70 border border-blue-100">
+            <span class="block font-bold text-pearson-blue">Part C</span>
+            <span class="text-slate-800 font-semibold">Conversations</span>
+            <span class="block text-[11px] font-mono font-bold text-teal-700 mt-1">15s response</span>
+            <span class="block text-[10px] text-slate-500">Dual native voices</span>
+          </div>
+          <div class="p-2.5 rounded-lg bg-blue-50/70 border border-blue-100">
+            <span class="block font-bold text-pearson-blue">Part D</span>
+            <span class="text-slate-800 font-semibold">Completions</span>
+            <span class="block text-[11px] font-mono font-bold text-teal-700 mt-1">25s response</span>
+            <span class="block text-[10px] text-slate-500">Lexical in context</span>
+          </div>
+          <div class="p-2.5 rounded-lg bg-blue-50/70 border border-blue-100">
+            <span class="block font-bold text-pearson-blue">Part E</span>
+            <span class="text-slate-800 font-semibold">Dictation</span>
+            <span class="block text-[11px] font-mono font-bold text-teal-700 mt-1">25s response</span>
+            <span class="block text-[10px] text-slate-500">Single audio play</span>
+          </div>
+          <div class="p-2.5 rounded-lg bg-blue-50/70 border border-blue-100">
+            <span class="block font-bold text-pearson-blue">Part F</span>
+            <span class="text-slate-800 font-semibold">Passage Recall</span>
+            <span class="block text-[11px] font-mono font-bold text-teal-700 mt-1">30s / 90s</span>
+            <span class="block text-[10px] text-slate-500">Read then write</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Start Button & Safe Fallback Note -->
+      <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-xs text-slate-500 flex items-center">
+          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600 mr-1.5 flex-shrink-0"></i>
+          <span>Official 4SET timed assessment mode active &bull; Seamless background audio streaming</span>
+        </div>
+        <button onclick="startVersantAssessment()" class="w-full sm:w-auto px-6 py-3 rounded-lg bg-pearson-navy hover:bg-slate-900 text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
+          <span>Start Assessment</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </section>
+
+    <section id="screen-test" class="hidden bg-white rounded-xl shadow-md border border-pearson-border overflow-hidden flex flex-col min-h-[540px]">
+      
+      <!-- Top Test Ribbon with Accent & Official Timer -->
+      <div class="bg-slate-50 px-5 py-3 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center space-x-2.5">
+          <span id="current-part-badge" class="px-2.5 py-1 rounded text-xs font-bold bg-pearson-navy text-white">Part A</span>
+          <span id="current-part-name" class="text-sm font-bold text-slate-800">Repeats</span>
+          <span id="question-progress-label" class="text-xs font-mono text-slate-500 border-l border-slate-300 pl-2">Item 1 of 24</span>
+          <!-- Dynamic Accent Badge -->
+          <span id="prompt-accent-badge" class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-bold bg-blue-100 text-blue-800 border border-blue-200">
+            🇺🇸 US Accent
+          </span>
+        </div>
+
+        <div class="flex items-center space-x-3 sm:space-x-4">
+          <!-- Audio Playback Animation -->
+          <div id="audio-playback-indicator" class="hidden items-center text-xs font-bold text-pearson-blue space-x-1.5 animate-pulse">
+            <i data-lucide="volume-2" class="w-4 h-4"></i>
+            <span>Audio Playing...</span>
+          </div>
+
+          <!-- Official Circular Timer Indicator -->
+          <div class="flex items-center bg-white border border-slate-300 rounded-lg px-2.5 py-1 space-x-2 shadow-xs">
+            <div class="relative w-6 h-6 flex items-center justify-center">
+              <svg class="w-6 h-6 transform -rotate-90">
+                <circle cx="12" cy="12" r="10" stroke="#E2E8F0" stroke-width="2.5" fill="none" />
+                <circle id="timer-svg-circle" cx="12" cy="12" r="10" stroke="#007AA5" stroke-width="2.5" stroke-dasharray="62.83" stroke-dashoffset="0" fill="none" class="countdown-circle" />
+              </svg>
+            </div>
+            <div>
+              <span id="test-timer-clock" class="font-mono text-xs font-bold text-slate-900 block leading-tight">00:15</span>
+              <span id="timer-sublabel" class="text-[9px] text-slate-400 uppercase tracking-wider block font-semibold">Response</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linear Percentage Progress Bar -->
+      <div class="w-full bg-slate-200 h-1.5">
+        <div id="test-linear-progress" class="bg-pearson-teal h-1.5 transition-all duration-300" style="width: 4%"></div>
+      </div>
+
+      <!-- Test Center Interactive Canvas -->
+      <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+        
+        <!-- Standard Versant Instructions Ribbon -->
+        <div class="mb-5">
+          <div class="bg-blue-50/70 border-l-4 border-pearson-blue p-4 rounded-r-lg">
+            <div class="flex items-center justify-between mb-1">
+              <h3 id="instruction-title" class="text-xs font-bold uppercase tracking-wider text-pearson-blue">Instructions</h3>
+              <span id="rule-timeout-notice" class="text-[11px] font-mono text-slate-500 font-medium">Official Timer: 15s</span>
+            </div>
+            <p id="instruction-desc" class="text-sm text-slate-700 leading-relaxed font-medium">
+              Please repeat each sentence that you hear. Speak immediately after the tone sounds.
+            </p>
+          </div>
+        </div>
+
+        <!-- Dynamic Question Workspace -->
+        <div id="workspace-center" class="my-auto py-3 flex flex-col items-center justify-center min-h-[200px]">
+          
+          <!-- STATE 1: Playing Audio Prompt -->
+          <div id="view-audio-prompt" class="flex flex-col items-center justify-center py-4">
+            <div class="relative w-24 h-24 rounded-full bg-blue-50 border-2 border-pearson-blue flex items-center justify-center mb-3">
+              <i data-lucide="volume-2" class="w-10 h-10 text-pearson-blue"></i>
+              <div id="audio-ring-pulse" class="hidden absolute inset-0 rounded-full border-4 border-blue-400 pulse-ring-effect"></div>
+            </div>
+            <p id="prompt-audio-subtitle" class="text-xs font-bold uppercase tracking-widest text-slate-500">Listen Carefully</p>
+          </div>
+
+          <!-- STATE 2: Recording Spoken Response (Speaking Gate Active) -->
+          <div id="view-speaking" class="hidden w-full max-w-lg flex flex-col items-center">
+            <div class="flex items-center space-x-2 mb-2">
+              <span class="w-3 h-3 rounded-full bg-red-600 animate-ping"></span>
+              <span class="text-xs font-bold uppercase tracking-wider text-red-600">Recording Your Response (Live Headset)</span>
+            </div>
+
+            <!-- Speech Onset Prompt Notice -->
+            <p id="speech-onset-warning" class="text-[11px] text-amber-700 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full mb-3 font-medium">
+              Please begin speaking within 6 seconds.
+            </p>
+
+            <!-- Real-time EQ Waveform Visualizer -->
+            <div id="live-speech-eq" class="flex items-center justify-center gap-1.5 h-12 w-full bg-slate-50 rounded-lg border border-slate-200 px-4 py-2 mb-3">
+              <div class="live-mic-eq-bar w-1.5 bg-red-500 h-2 rounded transition-all"></div>
+              <div class="live-mic-eq-bar w-1.5 bg-red-500 h-2 rounded transition-all"></div>
+              <div class="live-mic-eq-bar w-1.5 bg-red-500 h-2 rounded transition-all"></div>
+              <div class="live-mic-eq-bar w-1.5 bg-red-600 h-2 rounded transition-all"></div>
+              <div class="live-mic-eq-bar w-1.5 bg-red-500 h-2 rounded transition-all"></div>
+              <div class="live-mic-eq-bar w-1.5 bg-red-500 h-2 rounded transition-all"></div>
+              <div class="live-mic-eq-bar w-1.5 bg-red-500 h-2 rounded transition-all"></div>
+            </div>
+
+            <!-- Live Speech Buffer Box -->
+            <div class="w-full bg-white border border-slate-200 rounded-lg p-3 text-center shadow-xs">
+              <div class="flex items-center justify-between text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-1">
+                <span>Recognized Speech Stream</span>
+                <span id="speech-detected-indicator" class="text-slate-400 flex items-center gap-1 font-medium font-mono">
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span> Awaiting Voice
+                </span>
+              </div>
+              <p id="live-speech-box" class="text-sm font-medium text-slate-700 italic min-h-[22px]">
+                Listening... Speak naturally into your microphone.
+              </p>
+            </div>
+
+            <!-- Typing fallback if lab microphone fails -->
+            <div class="mt-3 text-center">
+              <button onclick="toggleFallbackText()" class="text-[11px] text-slate-400 hover:text-pearson-blue underline transition">
+                Headset audio issue? Click here to type your answer
+              </button>
+              <div id="fallback-type-wrap" class="hidden mt-2">
+                <input type="text" id="fallback-type-input" placeholder="Type what you would say here..." class="w-full px-3 py-1.5 text-xs border border-slate-300 rounded outline-none focus:border-pearson-blue">
+              </div>
+            </div>
+          </div>
+
+          <!-- STATE 3: Conversations & Sentence Completions (MCQ & Questions) -->
+          <div id="view-mcq" class="hidden w-full max-w-xl">
+            <div id="mcq-question-header" class="text-sm sm:text-base font-semibold text-slate-800 text-center mb-4"></div>
+            <div id="mcq-options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+          </div>
+
+          <!-- STATE 4: Dictation Typing Workspace -->
+          <div id="view-dictation" class="hidden w-full max-w-xl">
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
+              Type the exact sentence you heard (with standard punctuation and capitalization):
+            </label>
+            <input type="text" id="dictation-text-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type sentence here..." class="w-full px-4 py-3 border-2 border-slate-300 focus:border-pearson-blue rounded-lg text-base outline-none shadow-sm transition">
+            <div class="flex justify-between items-center text-[11px] text-slate-400 mt-2">
+              <span>Press <kbd class="px-1.5 py-0.5 bg-slate-200 rounded font-mono text-slate-700">Enter</kbd> to submit immediately</span>
+              <span id="dictation-characters">0 characters</span>
+            </div>
+          </div>
+
+          <!-- STATE 5: Passage Reconstruction Workspace -->
+          <div id="view-passage" class="hidden w-full max-w-2xl">
+            <!-- Phase A: 30-Second Timed Reading Card -->
+            <div id="passage-memo-card" class="bg-amber-50/70 border border-amber-200 rounded-xl p-5 shadow-sm mb-4">
+              <div class="flex items-center justify-between mb-2.5 border-b border-amber-200 pb-2">
+                <span class="text-xs font-bold text-amber-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <i data-lucide="book-open" class="w-4 h-4"></i>
+                  Memorize the Passage (Strictly 30 Seconds)
+                </span>
+                <span id="passage-read-timer" class="text-xs font-mono font-bold px-2 py-0.5 bg-amber-200 text-amber-900 rounded">30s remaining</span>
+              </div>
+              <p id="passage-memo-text" class="text-base text-slate-800 leading-relaxed font-serif"></p>
+            </div>
+
+            <!-- Phase B: 90-Second Writing Reconstruction Box -->
+            <div id="passage-reconstruct-card" class="hidden">
+              <div class="flex items-center justify-between mb-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                  Reconstruct the passage from memory in your own words (90 Seconds):
+                </label>
+                <span class="text-xs font-mono font-bold text-teal-700" id="passage-write-timer">90s remaining</span>
+              </div>
+              <textarea id="passage-write-input" rows="6" placeholder="Marcus discovered that his bicycle tire was..." class="w-full p-4 border-2 border-slate-300 focus:border-pearson-blue rounded-lg text-sm leading-relaxed outline-none shadow-sm transition custom-scroll"></textarea>
+              <div class="flex justify-between items-center text-xs text-slate-500 mt-2">
+                <span>Maintain clear grammar and key logical relationships.</span>
+                <span id="passage-words-count" class="font-mono">Words: 0</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer Control Strip -->
+        <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
+          <div class="text-xs text-slate-400 flex items-center gap-1.5 font-mono">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>Continuous Audio Lock Active</span>
+          </div>
+          <button id="btn-next-question" onclick="advanceQuestion()" class="px-5 py-2.5 rounded-lg bg-pearson-blue hover:bg-pearson-lightBlue text-white font-semibold text-sm transition flex items-center gap-1.5 shadow-sm">
+            <span>Next Item</span>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="screen-scorecard" class="hidden">
+      <div class="bg-white rounded-xl shadow-lg border border-pearson-border overflow-hidden score-card-sheet">
+        
+        <!-- Scorecard Header -->
+        <div class="bg-pearson-navy text-white p-6 sm:p-8 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="bg-pearson-teal px-2 py-0.5 rounded text-[11px] font-bold tracking-widest uppercase">Diagnostic Score Report</span>
+              <span id="scorecard-ref" class="text-xs text-slate-300 font-mono">REF: V4SET-2026-8819</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1">Versant 4SET Score Report</h2>
+            <p class="text-xs sm:text-sm text-slate-300">Global Scale of English (GSE 10–90) & CEFR Alignment</p>
+          </div>
+          <div class="flex items-center gap-2.5 no-print">
+            <button onclick="window.print()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 border border-slate-500 rounded-lg text-xs font-bold text-white transition flex items-center gap-1.5 shadow">
+              <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+              <span>Print / Save PDF</span>
+            </button>
+            <button onclick="returnToStart()" class="px-4 py-2 bg-pearson-blue hover:bg-pearson-lightBlue rounded-lg text-xs font-bold text-white transition shadow">
+              Retake / New Test
+            </button>
+          </div>
+        </div>
+
+        <!-- Metadata Strip -->
+        <div class="bg-slate-50 px-6 sm:px-8 py-3.5 border-b border-slate-200 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+          <div>
+            <span class="text-slate-400 block font-medium">Candidate Name</span>
+            <span id="sc-candidate-name" class="font-bold text-slate-800 text-sm">Scholar Candidate</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block font-medium">Assessment Date</span>
+            <span id="sc-date" class="font-bold text-slate-800 text-sm">October 2, 2026</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block font-medium">CEFR Level</span>
+            <span id="sc-cefr" class="font-bold text-pearson-blue text-sm">B2 (Independent)</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block font-medium">Scale Alignment</span>
+            <span class="font-bold text-slate-800 text-sm">Pearson GSE (10 - 90)</span>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-8">
+          <!-- Overall Composite Score Box -->
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center mb-8">
+            <div class="md:col-span-2 flex flex-col items-center justify-center p-6 bg-gradient-to-b from-blue-50 to-white rounded-2xl border-2 border-pearson-lightBlue/30 text-center shadow-xs">
+              <span class="text-xs font-bold uppercase tracking-wider text-pearson-blue mb-1">Overall 4SET Composite</span>
+              <div id="sc-overall-score" class="text-6xl font-black text-pearson-navy tracking-tight">68</div>
+              <div class="text-xs font-semibold text-slate-500 mt-1">Scale Range: 10 – 90</div>
+              <div id="sc-benchmark-badge" class="mt-3 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+                Meets Corporate Hiring Standard
+              </div>
+            </div>
+
+            <!-- 4 Skill Domain Bars -->
+            <div class="md:col-span-3 space-y-3.5">
+              <div>
+                <div class="flex justify-between items-center text-xs font-bold mb-1">
+                  <span class="text-slate-700 flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded bg-blue-600"></span> Speaking (Acoustic Pronunciation & Fluency)
+                  </span>
+                  <span id="sc-score-speaking" class="font-mono text-blue-700">65 / 90</span>
+                </div>
+                <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+                  <div id="bar-speaking" class="bg-blue-600 h-2.5 rounded-full" style="width: 65%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center text-xs font-bold mb-1">
+                  <span class="text-slate-700 flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded bg-teal-600"></span> Listening (Retention & Comprehension)
+                  </span>
+                  <span id="sc-score-listening" class="font-mono text-teal-700">72 / 90</span>
+                </div>
+                <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+                  <div id="bar-listening" class="bg-teal-600 h-2.5 rounded-full" style="width: 72%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center text-xs font-bold mb-1">
+                  <span class="text-slate-700 flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded bg-amber-600"></span> Reading (Vocabulary & Syntax Selection)
+                  </span>
+                  <span id="sc-score-reading" class="font-mono text-amber-700">70 / 90</span>
+                </div>
+                <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+                  <div id="bar-reading" class="bg-amber-600 h-2.5 rounded-full" style="width: 70%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center text-xs font-bold mb-1">
+                  <span class="text-slate-700 flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded bg-purple-600"></span> Writing (Dictation & Passage Reconstruction)
+                  </span>
+                  <span id="sc-score-writing" class="font-mono text-purple-700">66 / 90</span>
+                </div>
+                <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+                  <div id="bar-writing" class="bg-purple-600 h-2.5 rounded-full" style="width: 66%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Diagnostic Commentary -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 mb-8">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 flex items-center gap-1.5">
+              <i data-lucide="file-text" class="w-4 h-4 text-pearson-blue"></i>
+              Performance Summary & Multi-Accent Adaptation Diagnostics
+            </h4>
+            <p id="sc-commentary-text" class="text-xs text-slate-600 leading-relaxed">
+              The candidate demonstrates effective communicative control across daily and business contexts. Pronunciation is intelligible and fluid across American, British, and Australian spoken prompts.
+            </p>
+          </div>
+
+          <!-- Granular Item Audit -->
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-800 mb-3 flex items-center justify-between">
+              <span>Item-by-Item Performance Audit</span>
+              <span class="text-[11px] text-slate-500 font-normal">All responses compared against reference model</span>
+            </h4>
+            <div id="sc-audit-container" class="space-y-3 max-h-[460px] overflow-y-auto pr-2 custom-scroll"></div>
+          </div>
+
+        </div>
+
+        <div class="bg-slate-100 p-4 border-t border-slate-200 text-center text-xs text-slate-500 font-mono">
+          Pearson Versant 4SET Educational Simulation Engine &bull; Official Timers &bull; Continuous Single Stream
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="modal-drills" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full shadow-2xl overflow-hidden border border-slate-200">
+      <div class="bg-pearson-navy text-white px-5 py-4 flex justify-between items-center">
+        <h3 class="font-bold text-sm">Select Test Section Drill</h3>
+        <button onclick="toggleSectionDrillModal()" class="text-slate-300 hover:text-white">&times;</button>
+      </div>
+      <div class="p-5 space-y-3 text-sm">
+        <p class="text-xs text-slate-500 mb-2">Practice specific skill sections individually or take the full 4SET mock examination.</p>
+        
+        <button onclick="applyDrillMode('full')" class="w-full text-left p-3.5 rounded-lg border-2 border-pearson-blue bg-blue-50/50 hover:bg-blue-50 transition flex items-start gap-3">
+          <div class="p-2 rounded bg-pearson-blue text-white mt-0.5">
+            <i data-lucide="award" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <div class="font-bold text-slate-900 text-sm">Full 4SET Mock Exam (All 6 Parts)</div>
+            <div class="text-xs text-slate-600">Standard test with authentic timers and multi-accent prompts.</div>
+          </div>
+        </button>
+
+        <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400 pt-2">Targeted Section Drills:</div>
+        
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <button onclick="applyDrillMode('A')" class="p-2.5 rounded border border-slate-200 hover:border-pearson-teal hover:bg-teal-50/40 text-left font-medium text-slate-700">
+            Part A: Repeats (15s)
+          </button>
+          <button onclick="applyDrillMode('B')" class="p-2.5 rounded border border-slate-200 hover:border-pearson-teal hover:bg-teal-50/40 text-left font-medium text-slate-700">
+            Part B: Builds (15s)
+          </button>
+          <button onclick="applyDrillMode('C')" class="p-2.5 rounded border border-slate-200 hover:border-pearson-teal hover:bg-teal-50/40 text-left font-medium text-slate-700">
+            Part C: Conversations (15s)
+          </button>
+          <button onclick="applyDrillMode('D')" class="p-2.5 rounded border border-slate-200 hover:border-pearson-teal hover:bg-teal-50/40 text-left font-medium text-slate-700">
+            Part D: Completions (25s)
+          </button>
+          <button onclick="applyDrillMode('E')" class="p-2.5 rounded border border-slate-200 hover:border-pearson-teal hover:bg-teal-50/40 text-left font-medium text-slate-700">
+            Part E: Dictations (25s)
+          </button>
+          <button onclick="applyDrillMode('F')" class="p-2.5 rounded border border-slate-200 hover:border-pearson-teal hover:bg-teal-50/40 text-left font-medium text-slate-700">
+            Part F: Passages (30s/90s)
+          </button>
+        </div>
+      </div>
+      <div class="bg-slate-50 p-3 px-5 border-t border-slate-200 flex justify-end">
+        <button onclick="toggleSectionDrillModal()" class="px-3.5 py-1.5 text-xs font-semibold text-slate-600 hover:text-slate-800">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const 4SET_QUESTIONS = {
+      // PART A: Repeats (Listening + Speaking) - 15s Official Response
+      repeats: [
+        {
+          id: 'A1',
+          part: 'A',
+          type: 'repeat',
+          title: 'Part A: Repeats',
+          instruction: 'Please repeat each sentence that you hear. Speak immediately after the tone sounds.',
+          audioPrompt: 'The project deadline has been postponed until Friday morning.',
+          accent: 'en-US',
+          accentLabel: '🇺🇸 US Accent',
+          timeLimit: 15,
+          speechOnsetLimit: 6
+        },
+        {
+          id: 'A2',
+          part: 'A',
+          type: 'repeat',
+          title: 'Part A: Repeats',
+          instruction: 'Please repeat each sentence that you hear. Speak immediately after the tone sounds.',
+          audioPrompt: 'She requested an electronic copy of the financial summary before leaving.',
+          accent: 'en-GB',
+          accentLabel: '🇬🇧 British Accent',
+          timeLimit: 15,
+          speechOnsetLimit: 6
+        },
+        {
+          id: 'A3',
+          part: 'A',
+          type: 'repeat',
+          title: 'Part A: Repeats',
+          instruction: 'Please repeat each sentence that you hear. Speak immediately after the tone sounds.',
+          audioPrompt: 'Technical issues prevented several colleagues from joining the conference call.',
+          accent: 'en-AU',
+          accentLabel: '🇦🇺 Australian Accent',
+          timeLimit: 15,
+          speechOnsetLimit: 6
+        },
+        {
+          id: 'A4',
+          part: 'A',
+          type: 'repeat',
+          title: 'Part A: Repeats',
+          instruction: 'Please repeat each sentence that you hear. Speak immediately after the tone sounds.',
+          audioPrompt: 'Customer feedback indicates high satisfaction with the upgraded interface.',
+          accent: 'en-US',
+          accentLabel: '🇺🇸 US Accent',
+          timeLimit: 15,
+          speechOnsetLimit: 6
+        },
+        {
+          id: 'A5',
+          part: 'A',
+          type: 'repeat',
+          title: 'Part A: Repeats',
+          instruction: 'Please repeat each sentence that you hear. Speak immediately after the tone sounds.',
+          audioPrompt: 'Our director reminded everyone to submit their travel expenses promptly.',
+          accent: 'en-GB',
+          accentLabel: '🇬🇧 British Accent',
+          timeLimit: 15,
+          speechOnsetLimit: 6
+        }
+      ],
+
+      // PART B: Sentence Builds (Speaking + Syntax) - 15s Official Response
+      builds: [
+        {
+          id: 'B1',
+          part: 'B',
+          type: 'build',
+          title: 'Part B: Sentence Builds',
+          instruction: 'Rearrange the three spoken fragments into a grammatically correct sentence. Speak immediately after the tone.',
+          fragments: ['was reading a report', 'in the quiet room', 'the chief analyst'],
+          targetSentence: 'The chief analyst was reading a report in the quiet room.',
+          accent: 'en-GB',
+          accentLabel: '🇬🇧 British Accent',
+          timeLimit: 15,
+          speechOnsetLimit: 8
+        },
+        {
+          id: 'B2',
+          part: 'B',
+          type: 'build',
+          title: 'Part B: Sentence Builds',
+          instruction: 'Rearrange the three spoken fragments into a grammatically correct sentence. Speak immediately after the tone.',
+          fragments: ['will receive a confirmation email', 'all registered clients', 'by tomorrow afternoon'],
+          targetSentence: 'All registered clients will receive a confirmation email by tomorrow afternoon.',
+          accent: 'en-US',
+          accentLabel: '🇺🇸 US Accent',
+          timeLimit: 15,
+          speechOnsetLimit: 8
+        },
+        {
+          id: 'B3',
+          part: 'B',
+          type: 'build',
+          title: 'Part B: Sentence Builds',
+          instruction: 'Rearrange the three spoken fragments into a grammatically correct sentence. Speak immediately after the tone.',
+          fragments: ['demanded immediate attention', 'the sudden power outage', 'from building engineers'],
+          targetSentence: 'The sudden power outage demanded immediate attention from building engineers.',
+          accent: 'en-AU',
+          accentLabel: '🇦🇺 Australian Accent',
+          timeLimit: 15,
+          speechOnsetLimit: 8
+        },
+        {
+          id: 'B4',
+          part: 'B',
+          type: 'build',
+          title: 'Part B: Sentence Builds',
+          instruction: 'Rearrange the three spoken fragments into a grammatically correct sentence. Speak immediately after the tone.',
+          fragments: ['to organize the annual summit', 'volunteered her team', 'the regional director'],
+          targetSentence: 'The regional director volunteered her team to organize the annual summit.',
+          accent: 'en-GB',
+          accentLabel: '🇬🇧 British Accent',
+          timeLimit: 15,
+          speechOnsetLimit: 8
+        },
+        {
+          id: 'B5',
+          part: 'B',
+          type: 'build',
+          title: 'Part B: Sentence Builds',
+          instruction: 'Rearrange the three spoken fragments into a grammatically correct sentence. Speak immediately after the tone.',
+          fragments: ['arrived early at the terminal', 'to catch the express train', 'the commuters'],
+          targetSentence: 'The commuters arrived early at the terminal to catch the express train.',
+          accent: 'en-US',
+          accentLabel: '🇺🇸 US Accent',
+          timeLimit: 15,
+          speechOnsetLimit: 8
+        }
+      ],
+
+      // PART C: Conversations (Listening Comprehension) - Dual Speaker & 15s Timer
+      conversations: [
+        {
+          id: 'C1',
+          part: 'C',
+          type: 'conversation',
+          title: 'Part C: Conversations',
+          instruction: 'Listen to the short dialogue between two speakers. Then answer the multiple-choice question.',
+          dialogue: [
+            { speaker: 'Man', accent: 'en-US', text: 'Sarah, did you manage to ship the quarterly budget file to London yet?' },
+            { speaker: 'Woman', accent: 'en-GB', text: 'Not yet, David. I found a couple of discrepancies in the logistics totals, so I am revising them with accounting right now.' }
+          ],
+          questionAudio: 'Why did Sarah delay sending the budget report?',
+          question: 'Why did Sarah delay sending the budget report?',
+          options: [
+            'She was waiting for London to open their office.',
+            'She found discrepancies that required revision.',
+            'The accounting software crashed unexpectedly.',
+            'She had already transferred the project to David.'
+          ],
+          correctIndex: 1,
+          accentLabel: '🇺🇸 US / 🇬🇧 UK Dialogue',
+          timeLimit: 15
+        },
+        {
+          id: 'C2',
+          part: 'C',
+          type: 'conversation',
+          title: 'Part C: Conversations',
+          instruction: 'Listen to the short dialogue between two speakers. Then answer the multiple-choice question.',
+          dialogue: [
+            { speaker: 'Woman', accent: 'en-AU', text: 'Are we hosting the new client presentation in conference room B or the auditorium?' },
+            { speaker: 'Man', accent: 'en-GB', text: 'Auditorium. Since their overseas executives are also joining in person, we need extra seating.' }
+          ],
+          questionAudio: 'Where will the client presentation take place?',
+          question: 'Where will the client presentation take place?',
+          options: [
+            'In conference room B',
+            'In the main auditorium',
+            'In an overseas branch office',
+            'Virtually via web conference only'
+          ],
+          correctIndex: 1,
+          accentLabel: '🇦🇺 AU / 🇬🇧 UK Dialogue',
+          timeLimit: 15
+        },
+        {
+          id: 'C3',
+          part: 'C',
+          type: 'conversation',
+          title: 'Part C: Conversations',
+          instruction: 'Listen to the short dialogue between two speakers. Then answer the multiple-choice question.',
+          dialogue: [
+            { speaker: 'Man', accent: 'en-US', text: 'I noticed your desk has been moved next to the quality assurance unit.' },
+            { speaker: 'Woman', accent: 'en-US', text: 'Yes, I am temporarily assisting them with software testing until our product launch in December.' }
+          ],
+          questionAudio: 'What is the woman currently responsible for doing?',
+          question: 'What is the woman currently responsible for doing?',
+          options: [
+            'Relocating the entire QA department',
+            'Overseeing company recruitment',
+            'Assisting with software testing',
+            'Writing technical user manuals'
+          ],
+          correctIndex: 2,
+          accentLabel: '🇺🇸 US Workplace Dialogue',
+          timeLimit: 15
+        },
+        {
+          id: 'C4',
+          part: 'C',
+          type: 'conversation',
+          title: 'Part C: Conversations',
+          instruction: 'Listen to the short dialogue between two speakers. Then answer the multiple-choice question.',
+          dialogue: [
+            { speaker: 'Woman', accent: 'en-GB', text: 'The catering vendor just called. They cannot deliver the lunches until twelve-thirty.' },
+            { speaker: 'Man', accent: 'en-AU', text: 'Let’s extend the morning keynote discussion by twenty minutes so nobody is waiting idly.' }
+          ],
+          questionAudio: 'How do the organizers plan to handle the delayed lunch delivery?',
+          question: 'How do the organizers plan to handle the delayed lunch delivery?',
+          options: [
+            'By canceling the keynote address',
+            'By ordering from a different restaurant',
+            'By extending the keynote discussion',
+            'By dismissing the audience early'
+          ],
+          correctIndex: 2,
+          accentLabel: '🇬🇧 UK / 🇦🇺 AU Dialogue',
+          timeLimit: 15
+        }
+      ],
+
+      // PART D: Sentence Completion (Reading & Lexical) - 25s Official Timer
+      completions: [
+        {
+          id: 'D1',
+          part: 'D',
+          type: 'completion',
+          title: 'Part D: Sentence Completion',
+          instruction: 'Read the sentence below and choose the word that best completes the meaning contextually.',
+          sentence: 'Because of unanticipated supply shortages, the manufacturing facility had to ______ its daily production target.',
+          options: ['reduce', 'celebrate', 'exceed', 'neglect'],
+          correctIndex: 0,
+          accentLabel: 'Reading Section',
+          timeLimit: 25
+        },
+        {
+          id: 'D2',
+          part: 'D',
+          type: 'completion',
+          title: 'Part D: Sentence Completion',
+          instruction: 'Read the sentence below and choose the word that best completes the meaning contextually.',
+          sentence: 'Employees are encouraged to attend the voluntary training program to ______ their professional competencies.',
+          options: ['prevent', 'enhance', 'dissolve', 'hesitate'],
+          correctIndex: 1,
+          accentLabel: 'Reading Section',
+          timeLimit: 25
+        },
+        {
+          id: 'D3',
+          part: 'D',
+          type: 'completion',
+          title: 'Part D: Sentence Completion',
+          instruction: 'Read the sentence below and choose the word that best completes the meaning contextually.',
+          sentence: 'The contract will remain ______ until all signatures from the legal representatives are validated.',
+          options: ['pending', 'identical', 'careless', 'frequent'],
+          correctIndex: 0,
+          accentLabel: 'Reading Section',
+          timeLimit: 25
+        },
+        {
+          id: 'D4',
+          part: 'D',
+          type: 'completion',
+          title: 'Part D: Sentence Completion',
+          instruction: 'Read the sentence below and choose the word that best completes the meaning contextually.',
+          sentence: 'Dr. Lawson gave a very ______ explanation that helped everyone understand the sophisticated data models.',
+          options: ['confusing', 'lucid', 'hostile', 'tardy'],
+          correctIndex: 1,
+          accentLabel: 'Reading Section',
+          timeLimit: 25
+        },
+        {
+          id: 'D5',
+          part: 'D',
+          type: 'completion',
+          title: 'Part D: Sentence Completion',
+          instruction: 'Read the sentence below and choose the word that best completes the meaning contextually.',
+          sentence: 'The marketing department plans to ______ a new promotional campaign next Tuesday across social channels.',
+          options: ['launch', 'refrain', 'displace', 'imply'],
+          correctIndex: 0,
+          accentLabel: 'Reading Section',
+          timeLimit: 25
+        }
+      ],
+
+      // PART E: Dictation (Listening & Typing) - 25s Official Response
+      dictations: [
+        {
+          id: 'E1',
+          part: 'E',
+          type: 'dictation',
+          title: 'Part E: Dictation',
+          instruction: 'Listen to the sentence. You will hear it only once. Type the exact sentence in the box with proper spelling and punctuation.',
+          audioPrompt: 'The company announced a significant increase in international sales.',
+          accent: 'en-US',
+          accentLabel: '🇺🇸 US Accent',
+          timeLimit: 25
+        },
+        {
+          id: 'E2',
+          part: 'E',
+          type: 'dictation',
+          title: 'Part E: Dictation',
+          instruction: 'Listen to the sentence. You will hear it only once. Type the exact sentence in the box with proper spelling and punctuation.',
+          audioPrompt: 'Please ensure your seat belts are fastened securely during takeoff.',
+          accent: 'en-GB',
+          accentLabel: '🇬🇧 British Accent',
+          timeLimit: 25
+        },
+        {
+          id: 'E3',
+          part: 'E',
+          type: 'dictation',
+          title: 'Part E: Dictation',
+          instruction: 'Listen to the sentence. You will hear it only once. Type the exact sentence in the box with proper spelling and punctuation.',
+          audioPrompt: 'Fresh fruits and vegetables are delivered to the cafeteria daily.',
+          accent: 'en-AU',
+          accentLabel: '🇦🇺 Australian Accent',
+          timeLimit: 25
+        },
+        {
+          id: 'E4',
+          part: 'E',
+          type: 'dictation',
+          title: 'Part E: Dictation',
+          instruction: 'Listen to the sentence. You will hear it only once. Type the exact sentence in the box with proper spelling and punctuation.',
+          audioPrompt: 'Regular exercise promotes cardiovascular health and mental wellbeing.',
+          accent: 'en-US',
+          accentLabel: '🇺🇸 US Accent',
+          timeLimit: 25
+        },
+        {
+          id: 'E5',
+          part: 'E',
+          type: 'dictation',
+          title: 'Part E: Dictation',
+          instruction: 'Listen to the sentence. You will hear it only once. Type the exact sentence in the box with proper spelling and punctuation.',
+          audioPrompt: 'Several senior researchers presented their findings at the scientific convention.',
+          accent: 'en-GB',
+          accentLabel: '🇬🇧 British Accent',
+          timeLimit: 25
+        }
+      ],
+
+      // PART F: Passage Reconstruction - 30s Read / 90s Write
+      passages: [
+        {
+          id: 'F1',
+          part: 'F',
+          type: 'passage',
+          title: 'Part F: Passage Reconstruction',
+          instruction: 'You have exactly 30 seconds to read the short passage. When time expires, the text will disappear and you will have strictly 90 seconds to rewrite the passage from memory.',
+          text: 'Marcus discovered that his bicycle tire was completely flat when he prepared to leave for university. Because the local repair shop was closed for the holiday, he decided to take the subway instead. Although he arrived twenty minutes late, his economics professor permitted him to take the midterm exam.',
+          keywords: ['marcus', 'bicycle', 'flat', 'tire', 'repair', 'closed', 'subway', 'late', 'twenty', 'professor', 'midterm', 'exam'],
+          accentLabel: 'Integrated Reading & Writing',
+          readLimit: 30,
+          writeLimit: 90
+        },
+        {
+          id: 'F2',
+          part: 'F',
+          type: 'passage',
+          title: 'Part F: Passage Reconstruction',
+          instruction: 'You have exactly 30 seconds to read the short passage. When time expires, the text will disappear and you will have strictly 90 seconds to rewrite the passage from memory.',
+          text: 'A group of marine scientists recently tagged six green sea turtles off the Hawaiian coastline. Using solar satellite transmitters, the researchers tracked their migratory route over three thousand kilometers across the Pacific. The collected data revealed unexpected feeding habitats that require international protection policies.',
+          keywords: ['marine', 'scientists', 'tagged', 'turtles', 'hawaiian', 'satellite', 'migratory', 'pacific', 'feeding', 'habitats', 'protection'],
+          accentLabel: 'Integrated Reading & Writing',
+          readLimit: 30,
+          writeLimit: 90
+        }
+      ]
+    };
+  </script>
+
+  <script>
+    // Audio and Speech State
+    let webAudioCtx = null;
+    let micMediaStream = null;
+    let micSourceNode = null;
+    let micAnalyserNode = null;
+    let micAnimationId = null;
+    let hasMicPermission = false;
+
+    let continuousRecognizer = null;
+    let speechInputGate = false;
+    let liveCapturedSpeech = '';
+    let speechUpdateCallback = null;
+    let speechDetectedInCurrentItem = false;
+    let speechOnsetTimerId = null;
+
+    // Available Voices Cache
+    let systemVoices = [];
+
+    function populateVoiceList() {
+      if ('speechSynthesis' in window) {
+        systemVoices = window.speechSynthesis.getVoices();
+      }
+    }
+    populateVoiceList();
+    if ('speechSynthesis' in window && window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = populateVoiceList;
+    }
+
+    /**
+     * Resolves voice based on target BCP-47 accent code
+     * en-US: American
+     * en-GB: British
+     * en-AU: Australian
+     */
+    function findVoiceForAccent(langCode, gender = 'any') {
+      if (!systemVoices.length) populateVoiceList();
+      const lowerCode = langCode.toLowerCase();
+
+      // Look for exact locale match
+      const matchingVoices = systemVoices.filter(v => v.lang && v.lang.toLowerCase().replace('_', '-').startsWith(lowerCode));
+
+      if (matchingVoices.length > 0) {
+        if (gender === 'female') {
+          const femaleMatch = matchingVoices.find(v => /female|woman|zira|samantha|karen|catherine|victoria|fiona/i.test(v.name));
+          if (femaleMatch) return femaleMatch;
+        } else if (gender === 'male') {
+          const maleMatch = matchingVoices.find(v => /male|man|david|george|daniel|russell|oliver|arthur/i.test(v.name));
+          if (maleMatch) return maleMatch;
+        }
+        return matchingVoices[0];
+      }
+
+      // Fallback: look for language family
+      const generalEnglish = systemVoices.find(v => v.lang && v.lang.startsWith('en'));
+      return generalEnglish || null;
+    }
+
+    function obtainAudioContext() {
+      if (!webAudioCtx) {
+        const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtxClass) webAudioCtx = new AudioCtxClass();
+      }
+      if (webAudioCtx && webAudioCtx.state === 'suspended') {
+        webAudioCtx.resume();
+      }
+      return webAudioCtx;
+    }
+
+    function playBeepTone(freq = 880, duration = 0.35) {
+      try {
+        const ctx = obtainAudioContext();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+        gain.gain.setValueAtTime(0.001, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.28, ctx.currentTime + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + duration);
+
+        const badge = document.getElementById('speaker-test-badge');
+        badge.textContent = 'Tone Verified ✓';
+        badge.className = 'text-[11px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold';
+      } catch (err) {
+        console.warn('Tone error:', err);
+      }
+    }
+
+    function testAccentVoice(accentCode) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      
+      const sampleSentences = {
+        'en-US': "Welcome to the Versant 4 Skills assessment in standard American English.",
+        'en-GB': "This is the British English voice model. Please ensure the prompt is clearly audible.",
+        'en-AU': "Testing the Australian Commonwealth accent model for your listening practice."
+      };
+
+      const u = new SpeechSynthesisUtterance(sampleSentences[accentCode] || sampleSentences['en-US']);
+      u.lang = accentCode;
+      const matched = findVoiceForAccent(accentCode);
+      if (matched) u.voice = matched;
+      u.rate = 0.94;
+      window.speechSynthesis.speak(u);
+
+      const badge = document.getElementById('speaker-test-badge');
+      badge.textContent = `${accentCode} Verified ✓`;
+      badge.className = 'text-[11px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold';
+    }
+
+    /**
+     * LOCK CONTINUOUS AUDIO (Zero Permission Popups)
+     */
+    async function initializeContinuousAudio() {
+      const btn = document.getElementById('lock-mic-btn');
+      const badge = document.getElementById('mic-test-badge');
+      const label = document.getElementById('mic-live-label');
+
+      btn.disabled = true;
+      btn.innerHTML = `<span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-300 animate-ping mr-1"></span> Locking Stream...`;
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+        });
+
+        micMediaStream = stream;
+        hasMicPermission = true;
+
+        const ctx = obtainAudioContext();
+        if (ctx) {
+          micSourceNode = ctx.createMediaStreamSource(stream);
+          micAnalyserNode = ctx.createAnalyser();
+          micAnalyserNode.fftSize = 64;
+          micSourceNode.connect(micAnalyserNode);
+          startMeterAnimation();
+        }
+
+        setupContinuousSpeechRecognition();
+
+        badge.textContent = 'Mic Locked ✓';
+        badge.className = 'text-[11px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold';
+        label.textContent = 'Stream locked permanently. Zero popups will appear during speaking.';
+        btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i> Stream Locked`;
+        btn.className = 'px-3.5 py-2 text-xs font-bold bg-slate-700 text-white rounded transition flex items-center gap-1.5 cursor-default';
+
+        const pillDot = document.getElementById('mic-pill-dot');
+        const pillText = document.getElementById('mic-pill-text');
+        const micPill = document.getElementById('mic-status-pill');
+        pillDot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+        pillText.textContent = 'Mic: Stream Locked';
+        micPill.className = 'flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-700 text-xs text-emerald-300 font-mono';
+        
+        lucide.createIcons();
+      } catch (err) {
+        console.warn('Mic authorization error:', err);
+        btn.disabled = false;
+        btn.innerHTML = `<i data-lucide="mic" class="w-3.5 h-3.5"></i> <span>Retry Lock</span>`;
+        badge.textContent = 'Permission Needed';
+        badge.className = 'text-[11px] px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold';
+        label.textContent = 'Please click "Allow while visiting the site" when prompted.';
+        lucide.createIcons();
+      }
+    }
+
+    function setupContinuousSpeechRecognition() {
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRec) return;
+      if (continuousRecognizer) return;
+
+      try {
+        continuousRecognizer = new SpeechRec();
+        continuousRecognizer.continuous = true;
+        continuousRecognizer.interimResults = true;
+        continuousRecognizer.lang = 'en-US';
+
+        continuousRecognizer.onresult = (e) => {
+          if (!speechInputGate) return;
+          let transcript = '';
+          for (let i = e.resultIndex; i < e.results.length; i++) {
+            transcript += e.results[i][0].transcript;
+          }
+          if (transcript.trim()) {
+            liveCapturedSpeech = transcript.trim();
+            speechDetectedInCurrentItem = true;
+            if (speechUpdateCallback) speechUpdateCallback(liveCapturedSpeech);
+          }
+        };
+
+        continuousRecognizer.onerror = (e) => {
+          if (e.error !== 'no-speech' && e.error !== 'aborted') {
+            console.log('Stream notice:', e.error);
+          }
+        };
+
+        continuousRecognizer.onend = () => {
+          if (isTestRunning || hasMicPermission) {
+            try { continuousRecognizer.start(); } catch (err) {}
+          }
+        };
+
+        continuousRecognizer.start();
+      } catch (err) {}
+    }
+
+    function startMeterAnimation() {
+      if (micAnimationId) cancelAnimationFrame(micAnimationId);
+      if (!micAnalyserNode) return;
+
+      const calibBars = document.querySelectorAll('.calib-bar');
+      const testBars = document.querySelectorAll('.live-mic-eq-bar');
+      const dataArr = new Uint8Array(micAnalyserNode.frequencyBinCount);
+
+      function renderFrame() {
+        micAnalyserNode.getByteFrequencyData(dataArr);
+        let sum = 0;
+        for (let i = 0; i < dataArr.length; i++) sum += dataArr[i];
+        const avg = sum / dataArr.length;
+
+        calibBars.forEach((bar, idx) => {
+          const val = dataArr[idx % dataArr.length] / 255;
+          const h = Math.max(3, Math.round(val * 24));
+          bar.style.height = `${h}px`;
+          if (avg > 10) {
+            bar.classList.add('bg-emerald-500');
+            bar.classList.remove('bg-slate-300');
+          } else {
+            bar.classList.add('bg-slate-300');
+            bar.classList.remove('bg-emerald-500');
+          }
+        });
+
+        testBars.forEach((bar, idx) => {
+          const val = dataArr[idx % dataArr.length] / 255;
+          const h = Math.max(4, Math.round(val * 42));
+          bar.style.height = `${h}px`;
+        });
+
+        micAnimationId = requestAnimationFrame(renderFrame);
+      }
+      renderFrame();
+    }
+  </script>
+
+  <script>
+    let activeDrillMode = 'full';
+    let questionQueue = [];
+    let currentIdx = 0;
+    let timerId = null;
+    let secondsRemaining = 0;
+    let totalTimerSpan = 15;
+    let responsesLog = {};
+    let isTestRunning = false;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      if (window.location.protocol === 'file:') {
+        document.getElementById('file-protocol-warning').classList.remove('hidden');
+      }
+    });
+
+    function toggleSectionDrillModal() {
+      const modal = document.getElementById('modal-drills');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+
+    function applyDrillMode(mode) {
+      activeDrillMode = mode;
+      toggleSectionDrillModal();
+      startVersantAssessment();
+    }
+
+    function buildTestQueue() {
+      if (activeDrillMode === 'full') {
+        return [
+          ...4SET_QUESTIONS.repeats,
+          ...4SET_QUESTIONS.builds,
+          ...4SET_QUESTIONS.conversations,
+          ...4SET_QUESTIONS.completions,
+          ...4SET_QUESTIONS.dictations,
+          ...4SET_QUESTIONS.passages
+        ];
+      } else if (activeDrillMode === 'A') return [...4SET_QUESTIONS.repeats];
+      else if (activeDrillMode === 'B') return [...4SET_QUESTIONS.builds];
+      else if (activeDrillMode === 'C') return [...4SET_QUESTIONS.conversations];
+      else if (activeDrillMode === 'D') return [...4SET_QUESTIONS.completions];
+      else if (activeDrillMode === 'E') return [...4SET_QUESTIONS.dictations];
+      else if (activeDrillMode === 'F') return [...4SET_QUESTIONS.passages];
+      return [...4SET_QUESTIONS.repeats];
+    }
+
+    async function startVersantAssessment() {
+      isTestRunning = true;
+      if (!hasMicPermission) {
+        await initializeContinuousAudio();
+      }
+
+      const candInput = document.getElementById('candidate-name').value.trim();
+      document.getElementById('sc-candidate-name').textContent = candInput || 'Scholar Candidate';
+
+      questionQueue = buildTestQueue();
+      currentIdx = 0;
+      responsesLog = {};
+
+      document.getElementById('screen-welcome').classList.add('hidden');
+      document.getElementById('screen-scorecard').classList.add('hidden');
+      document.getElementById('screen-test').classList.remove('hidden');
+
+      loadCurrentItem();
+    }
+
+    function returnToStart() {
+      clearInterval(timerId);
+      clearTimeout(speechOnsetTimerId);
+      isTestRunning = false;
+      speechInputGate = false;
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+      document.getElementById('screen-welcome').classList.remove('hidden');
+      document.getElementById('screen-scorecard').classList.add('hidden');
+      document.getElementById('screen-test').classList.add('hidden');
+    }
+
+    function loadCurrentItem() {
+      clearInterval(timerId);
+      clearTimeout(speechOnsetTimerId);
+      speechInputGate = false;
+      liveCapturedSpeech = '';
+      speechUpdateCallback = null;
+      speechDetectedInCurrentItem = false;
+
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+
+      if (currentIdx >= questionQueue.length) {
+        generateScoreReport();
+        return;
+      }
+
+      const item = questionQueue[currentIdx];
+
+      // Update Navigation & Accent Indicator
+      document.getElementById('current-part-badge').textContent = `Part ${item.part}`;
+      document.getElementById('current-part-name').textContent = item.title.split(':')[1]?.trim() || item.title;
+      document.getElementById('question-progress-label').textContent = `Item ${currentIdx + 1} of ${questionQueue.length}`;
+      document.getElementById('prompt-accent-badge').textContent = item.accentLabel || 'Standard English';
+
+      const progressPct = Math.round(((currentIdx + 1) / questionQueue.length) * 100);
+      document.getElementById('test-linear-progress').style.width = `${progressPct}%`;
+
+      // Update Instructions & Official Rule Notice
+      document.getElementById('instruction-title').textContent = `${item.title} Instructions`;
+      document.getElementById('instruction-desc').textContent = item.instruction;
+      document.getElementById('rule-timeout-notice').textContent = `Official Timer: ${item.timeLimit || 15}s`;
+
+      // Reset Views
+      document.getElementById('view-audio-prompt').classList.add('hidden');
+      document.getElementById('view-speaking').classList.add('hidden');
+      document.getElementById('speech-onset-warning').classList.add('hidden');
+      document.getElementById('fallback-type-wrap').classList.add('hidden');
+      document.getElementById('fallback-type-input').value = '';
+      document.getElementById('view-mcq').classList.add('hidden');
+      document.getElementById('view-dictation').classList.add('hidden');
+      document.getElementById('view-passage').classList.add('hidden');
+
+      if (item.type === 'repeat') {
+        renderPartARepeats(item);
+      } else if (item.type === 'build') {
+        renderPartBSentenceBuilds(item);
+      } else if (item.type === 'conversation') {
+        renderPartCConversations(item);
+      } else if (item.type === 'completion') {
+        renderPartDCompletions(item);
+      } else if (item.type === 'dictation') {
+        renderPartEDictation(item);
+      } else if (item.type === 'passage') {
+        renderPartFPassage(item);
+      }
+      lucide.createIcons();
+    }
+
+    // --- PART A: REPEATS (15s Official Timer, 6s Speech Onset Rule) ---
+    function renderPartARepeats(item) {
+      const audioView = document.getElementById('view-audio-prompt');
+      const audioPulse = document.getElementById('audio-ring-pulse');
+      const indicator = document.getElementById('audio-playback-indicator');
+      const subtitle = document.getElementById('prompt-audio-subtitle');
+
+      audioView.classList.remove('hidden');
+      audioPulse.classList.remove('hidden');
+      indicator.classList.remove('hidden');
+      indicator.classList.add('flex');
+      subtitle.textContent = `Listening (${item.accentLabel})...`;
+
+      readAccentedUtterance(item.audioPrompt, item.accent, () => {
+        indicator.classList.add('hidden');
+        indicator.classList.remove('flex');
+        audioPulse.classList.add('hidden');
+        playBeepTone(880, 0.35);
+
+        setTimeout(() => {
+          audioView.classList.add('hidden');
+          activateSpeakingGate(item, 15, 6);
+        }, 350);
+      });
+    }
+
+    // --- PART B: SENTENCE BUILDS (15s Official Timer, 8s Speech Onset Rule) ---
+    function renderPartBSentenceBuilds(item) {
+      const audioView = document.getElementById('view-audio-prompt');
+      const audioPulse = document.getElementById('audio-ring-pulse');
+      const indicator = document.getElementById('audio-playback-indicator');
+      const subtitle = document.getElementById('prompt-audio-subtitle');
+
+      audioView.classList.remove('hidden');
+      audioPulse.classList.remove('hidden');
+      indicator.classList.remove('hidden');
+      indicator.classList.add('flex');
+      subtitle.textContent = `Listening to scrambled phrases (${item.accentLabel})...`;
+
+      playSequentialFragments(item.fragments, item.accent, () => {
+        indicator.classList.add('hidden');
+        indicator.classList.remove('flex');
+        audioPulse.classList.add('hidden');
+        playBeepTone(880, 0.35);
+
+        setTimeout(() => {
+          audioView.classList.add('hidden');
+          activateSpeakingGate(item, 15, 8);
+        }, 350);
+      });
+    }
+
+    function playSequentialFragments(fragments, accent, onComplete) {
+      let idx = 0;
+      function nextFrag() {
+        if (idx >= fragments.length) {
+          if (onComplete) onComplete();
+          return;
+        }
+        readAccentedUtterance(fragments[idx], accent, () => {
+          idx++;
+          setTimeout(nextFrag, 600); // Natural pause between triplets
+        }, 0.9);
+      }
+      nextFrag();
+    }
+
+    /**
+     * SOFTWARE-GATED RECORDING ENGINE
+     * Manages official 15-second response countdown & speech onset inactivity detection.
+     */
+    function activateSpeakingGate(item, seconds = 15, onsetLimit = 6) {
+      const viewSpeaking = document.getElementById('view-speaking');
+      const liveBox = document.getElementById('live-speech-box');
+      const detIndicator = document.getElementById('speech-detected-indicator');
+      const onsetWarn = document.getElementById('speech-onset-warning');
+
+      viewSpeaking.classList.remove('hidden');
+      onsetWarn.classList.remove('hidden');
+      onsetWarn.textContent = `Official Rule: Speak within ${onsetLimit} seconds or test advances.`;
+      liveBox.textContent = 'Listening... Speak clearly into your headset.';
+      detIndicator.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span> Awaiting Voice';
+
+      liveCapturedSpeech = '';
+      speechDetectedInCurrentItem = false;
+      speechInputGate = true;
+
+      speechUpdateCallback = (text) => {
+        liveBox.textContent = text || 'Listening...';
+        detIndicator.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span> Speaking Detected';
+      };
+
+      // Inactivity Rule: If no speech within onsetLimit, warn and prepare advance
+      speechOnsetTimerId = setTimeout(() => {
+        if (!speechDetectedInCurrentItem && !document.getElementById('fallback-type-input').value.trim()) {
+          onsetWarn.textContent = 'No voice detected yet. Complete your sentence now!';
+          onsetWarn.className = 'text-[11px] text-red-700 bg-red-50 border border-red-200 px-3 py-1 rounded-full mb-3 font-bold animate-pulse';
+        }
+      }, onsetLimit * 1000);
+
+      startCountdownClock(seconds, () => {
+        speechInputGate = false;
+        clearTimeout(speechOnsetTimerId);
+
+        const manualVal = document.getElementById('fallback-type-input').value.trim();
+        const candidateSpeech = manualVal || liveCapturedSpeech.trim() || '[No speech detected]';
+
+        responsesLog[item.id] = {
+          response: candidateSpeech,
+          target: item.type === 'repeat' ? item.audioPrompt : item.targetSentence,
+          item: item
+        };
+        currentIdx++;
+        loadCurrentItem();
+      });
+    }
+
+    function toggleFallbackText() {
+      const wrap = document.getElementById('fallback-type-wrap');
+      wrap.classList.toggle('hidden');
+      if (!wrap.classList.contains('hidden')) {
+        document.getElementById('fallback-type-input').focus();
+      }
+    }
+
+    // --- PART C: CONVERSATIONS (Multi-Speaker Dialogue + 15s Timer) ---
+    function renderPartCConversations(item) {
+      const audioView = document.getElementById('view-audio-prompt');
+      const audioPulse = document.getElementById('audio-ring-pulse');
+      const indicator = document.getElementById('audio-playback-indicator');
+      const subtitle = document.getElementById('prompt-audio-subtitle');
+      const mcqView = document.getElementById('view-mcq');
+
+      audioView.classList.remove('hidden');
+      audioPulse.classList.remove('hidden');
+      indicator.classList.remove('hidden');
+      indicator.classList.add('flex');
+      subtitle.textContent = `Listening to dialogue (${item.accentLabel})...`;
+
+      playMultiAccentDialogue(item.dialogue, () => {
+        // Read question aloud
+        subtitle.textContent = 'Listening to comprehension question...';
+        readAccentedUtterance(item.questionAudio, 'en-US', () => {
+          indicator.classList.add('hidden');
+          indicator.classList.remove('flex');
+          audioPulse.classList.add('hidden');
+          audioView.classList.add('hidden');
+
+          mcqView.classList.remove('hidden');
+          document.getElementById('mcq-question-header').textContent = item.question;
+
+          const container = document.getElementById('mcq-options-container');
+          container.innerHTML = '';
+          item.options.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'w-full text-left p-3.5 rounded-lg border-2 border-slate-200 hover:border-pearson-blue hover:bg-blue-50/50 transition font-medium text-xs sm:text-sm text-slate-800 flex items-center gap-3 shadow-xs';
+            btn.innerHTML = `<span class="w-6 h-6 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center text-xs font-bold text-slate-600">${String.fromCharCode(65 + idx)}</span> <span>${opt}</span>`;
+            btn.onclick = () => selectMcqChoice(item, idx);
+            container.appendChild(btn);
+          });
+
+          // Official 15s Timer
+          startCountdownClock(15, () => {
+            if (!responsesLog[item.id]) {
+              responsesLog[item.id] = { response: -1, target: item.correctIndex, item };
+              currentIdx++;
+              loadCurrentItem();
+            }
+          });
+        });
+      });
+    }
+
+    function playMultiAccentDialogue(dialogueArr, onFinish) {
+      let idx = 0;
+      function next() {
+        if (idx >= dialogueArr.length) {
+          if (onFinish) onFinish();
+          return;
+        }
+        const line = dialogueArr[idx];
+        const u = new SpeechSynthesisUtterance(line.text);
+        u.lang = line.accent || 'en-US';
+        const matched = findVoiceForAccent(line.accent, line.speaker === 'Man' ? 'male' : 'female');
+        if (matched) u.voice = matched;
+        u.rate = 0.94;
+        u.pitch = line.speaker === 'Man' ? 0.85 : 1.2;
+        u.onend = () => { idx++; setTimeout(next, 350); };
+        u.onerror = () => { idx++; setTimeout(next, 250); };
+        window.speechSynthesis.speak(u);
+      }
+      next();
+    }
+
+    // --- PART D: SENTENCE COMPLETION (Exact 25s Timer) ---
+    function renderPartDCompletions(item) {
+      const mcqView = document.getElementById('view-mcq');
+      mcqView.classList.remove('hidden');
+
+      document.getElementById('mcq-question-header').innerHTML = `
+        <span class="text-xs uppercase tracking-wider text-slate-400 block mb-2 font-bold">Select the word that best completes the sentence (25 Seconds):</span>
+        <div class="text-sm sm:text-base font-semibold text-slate-900 bg-slate-50 p-4 rounded-lg border border-slate-200">${item.sentence}</div>
+      `;
+
+      const container = document.getElementById('mcq-options-container');
+      container.innerHTML = '';
+      item.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'w-full text-left p-3.5 rounded-lg border-2 border-slate-200 hover:border-pearson-blue hover:bg-blue-50/50 transition font-medium text-xs sm:text-sm text-slate-800 flex items-center gap-3 shadow-xs';
+        btn.innerHTML = `<span class="w-6 h-6 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center text-xs font-bold text-slate-600">${String.fromCharCode(65 + idx)}</span> <span>${opt}</span>`;
+        btn.onclick = () => selectMcqChoice(item, idx);
+        container.appendChild(btn);
+      });
+
+      // Exact 25s Countdown
+      startCountdownClock(25, () => {
+        if (!responsesLog[item.id]) {
+          responsesLog[item.id] = { response: -1, target: item.correctIndex, item };
+          currentIdx++;
+          loadCurrentItem();
+        }
+      });
+    }
+
+    function selectMcqChoice(item, chosenIdx) {
+      clearInterval(timerId);
+      responsesLog[item.id] = {
+        response: chosenIdx,
+        target: item.correctIndex,
+        item: item
+      };
+      currentIdx++;
+      loadCurrentItem();
+    }
+
+    // --- PART E: DICTATION (Exact 25s Official Countdown) ---
+    function renderPartEDictation(item) {
+      const dictView = document.getElementById('view-dictation');
+      const input = document.getElementById('dictation-text-input');
+      const counter = document.getElementById('dictation-characters');
+      const indicator = document.getElementById('audio-playback-indicator');
+
+      dictView.classList.remove('hidden');
+      input.value = '';
+      input.disabled = true;
+      counter.textContent = '0 characters';
+      indicator.classList.remove('hidden');
+      indicator.classList.add('flex');
+
+      readAccentedUtterance(item.audioPrompt, item.accent, () => {
+        indicator.classList.add('hidden');
+        indicator.classList.remove('flex');
+        playBeepTone(920, 0.3);
+        input.disabled = false;
+        input.focus();
+
+        input.oninput = () => {
+          counter.textContent = `${input.value.length} characters`;
+        };
+
+        input.onkeydown = (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            commitDictation(item);
+          }
+        };
+
+        // Official 25s Countdown
+        startCountdownClock(25, () => {
+          commitDictation(item);
+        });
+      }, 0.92);
+    }
+
+    function commitDictation(item) {
+      clearInterval(timerId);
+      const input = document.getElementById('dictation-text-input');
+      responsesLog[item.id] = {
+        response: input.value.trim(),
+        target: item.audioPrompt,
+        item: item
+      };
+      currentIdx++;
+      loadCurrentItem();
+    }
+
+    // --- PART F: PASSAGE RECONSTRUCTION (Strict 30s Read / 90s Write) ---
+    function renderPartFPassage(item) {
+      const passageView = document.getElementById('view-passage');
+      const memoCard = document.getElementById('passage-memo-card');
+      const reconCard = document.getElementById('passage-reconstruct-card');
+      const memoText = document.getElementById('passage-memo-text');
+      const readClock = document.getElementById('passage-read-timer');
+      const writeClock = document.getElementById('passage-write-timer');
+      const writeInput = document.getElementById('passage-write-input');
+      const wordsCount = document.getElementById('passage-words-count');
+
+      passageView.classList.remove('hidden');
+      memoCard.classList.remove('hidden');
+      reconCard.classList.add('hidden');
+      memoText.textContent = item.text;
+      writeInput.value = '';
+      wordsCount.textContent = 'Words: 0';
+
+      document.getElementById('timer-sublabel').textContent = 'Reading';
+
+      // Phase 1: Strictly 30 seconds reading
+      startCountdownClock(30, () => {
+        playBeepTone(920, 0.4);
+        memoCard.classList.add('hidden');
+        reconCard.classList.remove('hidden');
+        writeInput.focus();
+        document.getElementById('timer-sublabel').textContent = 'Writing';
+
+        writeInput.oninput = () => {
+          const words = writeInput.value.trim().split(/\s+/).filter(Boolean);
+          wordsCount.textContent = `Words: ${words.length}`;
+        };
+
+        // Phase 2: Strictly 90 seconds written recall
+        startCountdownClock(90, () => {
+          commitPassage(item);
+        }, (tick) => {
+          writeClock.textContent = `${tick}s remaining`;
+        });
+      }, (tick) => {
+        readClock.textContent = `${tick}s remaining`;
+      });
+    }
+
+    function commitPassage(item) {
+      clearInterval(timerId);
+      const writeInput = document.getElementById('passage-write-input');
+      responsesLog[item.id] = {
+        response: writeInput.value.trim(),
+        target: item.text,
+        item: item
+      };
+      currentIdx++;
+      loadCurrentItem();
+    }
+
+    // Countdown Clock Driver with SVG Radial Progress
+    function startCountdownClock(seconds, onComplete, onTick) {
+      clearInterval(timerId);
+      secondsRemaining = seconds;
+      totalTimerSpan = seconds;
+      renderClockDisplay(secondsRemaining, totalTimerSpan);
+
+      timerId = setInterval(() => {
+        secondsRemaining--;
+        renderClockDisplay(secondsRemaining, totalTimerSpan);
+        if (onTick) onTick(secondsRemaining);
+
+        if (secondsRemaining <= 0) {
+          clearInterval(timerId);
+          if (onComplete) onComplete();
+        }
+      }, 1000);
+    }
+
+    function renderClockDisplay(sec, total) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      document.getElementById('test-timer-clock').textContent = 
+        `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+
+      // Update SVG circular stroke (circumference = 2 * PI * 10 = 62.83)
+      const circle = document.getElementById('timer-svg-circle');
+      if (circle && total > 0) {
+        const offset = 62.83 - ((sec / total) * 62.83);
+        circle.style.strokeDashoffset = offset;
+        if (sec <= 5) circle.setAttribute('stroke', '#DC2626');
+        else circle.setAttribute('stroke', '#007AA5');
+      }
+    }
+
+    function advanceQuestion() {
+      if (currentIdx >= questionQueue.length) return;
+      const item = questionQueue[currentIdx];
+
+      if (item.type === 'repeat' || item.type === 'build') {
+        speechInputGate = false;
+        clearTimeout(speechOnsetTimerId);
+        const manualVal = document.getElementById('fallback-type-input').value.trim();
+        const candidateSpeech = manualVal || liveCapturedSpeech.trim() || '[Self-advanced]';
+
+        responsesLog[item.id] = {
+          response: candidateSpeech,
+          target: item.type === 'repeat' ? item.audioPrompt : item.targetSentence,
+          item: item
+        };
+        currentIdx++;
+        loadCurrentItem();
+      } else if (item.type === 'dictation') {
+        commitDictation(item);
+      } else if (item.type === 'passage') {
+        commitPassage(item);
+      } else if (item.type === 'conversation' || item.type === 'completion') {
+        if (!responsesLog[item.id]) {
+          responsesLog[item.id] = { response: -1, target: item.correctIndex, item };
+        }
+        currentIdx++;
+        loadCurrentItem();
+      }
+    }
+
+    function readAccentedUtterance(text, accentCode = 'en-US', onComplete, rate = 0.94) {
+      if (!('speechSynthesis' in window)) {
+        setTimeout(onComplete, 1200);
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = accentCode;
+      const matched = findVoiceForAccent(accentCode);
+      if (matched) u.voice = matched;
+      u.rate = rate;
+      u.onend = () => { if (onComplete) onComplete(); };
+      u.onerror = () => { if (onComplete) onComplete(); };
+      window.speechSynthesis.speak(u);
+    }
+  </script>
+
+  <script>
+    function sanitizeTokens(str) {
+      return str.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter(Boolean);
+    }
+
+    function computeWordAccuracyScore(userInput, reference) {
+      const inWords = sanitizeTokens(userInput);
+      const refWords = sanitizeTokens(reference);
+      if (refWords.length === 0) return 90;
+      if (inWords.length === 0) return 10;
+
+      let matchCount = 0;
+      const refCopy = [...refWords];
+      inWords.forEach(w => {
+        const idx = refCopy.indexOf(w);
+        if (idx !== -1) {
+          matchCount++;
+          refCopy.splice(idx, 1);
+        }
+      });
+
+      const precision = matchCount / inWords.length;
+      const recall = matchCount / refWords.length;
+      if (precision + recall === 0) return 15;
+      const f1 = (2 * precision * recall) / (precision + recall);
+      return Math.min(90, Math.max(10, Math.round(f1 * 80 + 10)));
+    }
+
+    function evaluatePassageRecall(userInput, reference, keywords) {
+      const words = sanitizeTokens(userInput);
+      if (words.length < 8) return 20;
+
+      let kwHits = 0;
+      keywords.forEach(kw => {
+        if (userInput.toLowerCase().includes(kw)) kwHits++;
+      });
+      const kwCoverage = kwHits / keywords.length;
+      const sentenceUnits = userInput.split(/[.!?]+/).filter(s => s.trim().length > 0);
+      let structureBonus = sentenceUnits.length >= 2 ? 15 : 5;
+
+      const raw = (kwCoverage * 65) + structureBonus + 10;
+      return Math.min(90, Math.max(15, Math.round(raw)));
+    }
+
+    function generateScoreReport() {
+      clearInterval(timerId);
+      clearTimeout(speechOnsetTimerId);
+      isTestRunning = false;
+      speechInputGate = false;
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+
+      document.getElementById('screen-test').classList.add('hidden');
+      document.getElementById('screen-scorecard').classList.remove('hidden');
+
+      const now = new Date();
+      document.getElementById('sc-date').textContent = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      document.getElementById('scorecard-ref').textContent = `REF: V4SET-${Math.floor(1000 + Math.random() * 9000)}-${now.getFullYear()}`;
+
+      let spkSum = 0, spkCount = 0;
+      let lisSum = 0, lisCount = 0;
+      let redSum = 0, redCount = 0;
+      let wrtSum = 0, wrtCount = 0;
+
+      const auditContainer = document.getElementById('sc-audit-container');
+      auditContainer.innerHTML = '';
+
+      questionQueue.forEach((item, idx) => {
+        const record = responsesLog[item.id] || { response: '', target: '', item };
+        let itemScore = 10;
+        let candidateDisplay = '';
+        let targetDisplay = '';
+
+        if (item.type === 'repeat') {
+          spkCount++;
+          lisCount += 0.5;
+          targetDisplay = item.audioPrompt;
+          candidateDisplay = record.response || '[No speech detected]';
+          itemScore = computeWordAccuracyScore(record.response || '', item.audioPrompt);
+          spkSum += itemScore;
+          lisSum += itemScore * 0.5;
+        } else if (item.type === 'build') {
+          spkCount++;
+          targetDisplay = item.targetSentence;
+          candidateDisplay = record.response || '[No speech detected]';
+          itemScore = computeWordAccuracyScore(record.response || '', item.targetSentence);
+          spkSum += itemScore;
+        } else if (item.type === 'conversation') {
+          lisCount++;
+          const choice = record.response;
+          itemScore = (choice === item.correctIndex) ? 88 : 25;
+          lisSum += itemScore;
+          candidateDisplay = choice >= 0 ? `Option ${String.fromCharCode(65 + choice)}: ${item.options[choice]}` : '[No Option Selected]';
+          targetDisplay = `Option ${String.fromCharCode(65 + item.correctIndex)}: ${item.options[item.correctIndex]}`;
+        } else if (item.type === 'completion') {
+          redCount++;
+          const choice = record.response;
+          itemScore = (choice === item.correctIndex) ? 88 : 22;
+          redSum += itemScore;
+          candidateDisplay = choice >= 0 ? item.options[choice] : '[No Option Selected]';
+          targetDisplay = item.options[item.correctIndex];
+        } else if (item.type === 'dictation') {
+          wrtCount++;
+          lisCount += 0.5;
+          targetDisplay = item.audioPrompt;
+          candidateDisplay = record.response || '[Empty submission]';
+          itemScore = computeWordAccuracyScore(record.response || '', item.audioPrompt);
+          wrtSum += itemScore;
+          lisSum += itemScore * 0.5;
+        } else if (item.type === 'passage') {
+          wrtCount++;
+          redCount++;
+          targetDisplay = item.text;
+          candidateDisplay = record.response || '[Empty submission]';
+          itemScore = evaluatePassageRecall(record.response || '', item.text, item.keywords);
+          wrtSum += itemScore;
+          redSum += itemScore;
+        }
+
+        const card = document.createElement('div');
+        const badgeColor = itemScore >= 70 ? 'bg-emerald-100 text-emerald-800' : (itemScore >= 45 ? 'bg-amber-100 text-amber-800' : 'bg-red-100 text-red-800');
+
+        card.className = 'p-3.5 rounded-lg border border-slate-200 bg-white text-xs shadow-xs';
+        card.innerHTML = `
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-slate-800">#${idx + 1} &bull; Part ${item.part} (${item.title.split(':')[1]?.trim() || item.type}) <span class="text-slate-400 font-normal">| ${item.accentLabel || ''}</span></span>
+            <span class="px-2 py-0.5 rounded font-mono font-bold text-[11px] ${badgeColor}">Score: ${itemScore} / 90</span>
+          </div>
+          <div class="space-y-1">
+            <div><span class="text-slate-400 font-semibold">Expected:</span> <span class="text-slate-700 font-medium">${targetDisplay}</span></div>
+            <div><span class="text-slate-400 font-semibold">Scholar Response:</span> <span class="text-slate-900 font-mono bg-slate-50 px-1.5 py-0.5 rounded border border-slate-200">${candidateDisplay}</span></div>
+          </div>
+        `;
+        auditContainer.appendChild(card);
+      });
+
+      const avgSpk = spkCount > 0 ? Math.min(90, Math.max(10, Math.round(spkSum / spkCount))) : 60;
+      const avgLis = lisCount > 0 ? Math.min(90, Math.max(10, Math.round(lisSum / lisCount))) : 60;
+      const avgRed = redCount > 0 ? Math.min(90, Math.max(10, Math.round(redSum / redCount))) : 60;
+      const avgWrt = wrtCount > 0 ? Math.min(90, Math.max(10, Math.round(wrtSum / wrtCount))) : 60;
+
+      const composite = Math.round((avgSpk * 0.3) + (avgLis * 0.25) + (avgRed * 0.2) + (avgWrt * 0.25));
+
+      document.getElementById('sc-score-speaking').textContent = `${avgSpk} / 90`;
+      document.getElementById('bar-speaking').style.width = `${avgSpk}%`;
+
+      document.getElementById('sc-score-listening').textContent = `${avgLis} / 90`;
+      document.getElementById('bar-listening').style.width = `${avgLis}%`;
+
+      document.getElementById('sc-score-reading').textContent = `${avgRed} / 90`;
+      document.getElementById('bar-reading').style.width = `${avgRed}%`;
+
+      document.getElementById('sc-score-writing').textContent = `${avgWrt} / 90`;
+      document.getElementById('bar-writing').style.width = `${avgWrt}%`;
+
+      document.getElementById('sc-overall-score').textContent = composite;
+
+      let cefrStr = 'B1 (Threshold)';
+      let benchmarkLabel = 'Meets Developing Benchmark';
+      let feedback = '';
+
+      if (composite >= 79) {
+        cefrStr = 'C1 (Advanced Professional)';
+        benchmarkLabel = 'Exceeds Corporate Hiring Threshold (C1)';
+        feedback = 'Exceptional multi-accent acoustic comprehension and prompt syntax mastery. The scholar adapts smoothly across US, British, and Australian varieties with immediate verbal response execution.';
+      } else if (composite >= 65) {
+        cefrStr = 'B2 (Upper Intermediate / Corporate Ready)';
+        benchmarkLabel = 'Meets Corporate Benchmark (B2)';
+        feedback = 'Solid, professional operational fluency. Adapts readily to regional pronunciation differences and constructs cohesive responses within official 4SET time allocations.';
+      } else if (composite >= 50) {
+        cefrStr = 'B1 (Intermediate)';
+        benchmarkLabel = 'Developing Competency (B1)';
+        feedback = 'Moderate conversational capability. Noticeable pause latency observed during sentence builds; continued practice with British and Australian stress cadence is recommended.';
+      } else {
+        cefrStr = 'A2 (Elementary)';
+        benchmarkLabel = 'Requires Language Intervention (A2)';
+        feedback = 'Foundational communication stage. Frequent timeout warnings triggered on speaking initiation. Focus on immediate shadowing and auditory memory drills.';
+      }
+
+      document.getElementById('sc-cefr').textContent = cefrStr;
+      document.getElementById('sc-benchmark-badge').textContent = benchmarkLabel;
+      document.getElementById('sc-commentary-text').textContent = feedback;
+
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
