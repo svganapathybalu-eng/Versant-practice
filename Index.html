@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V4SET Mock Test v3</title>
+<style>
+:root{--bg:#fff;--fg:#1c2530;--mut:#5d6b7a;--acc:#1f5fbf;--card:#f2f6fb;--line:#d9e2ee}
+@media (prefers-color-scheme:dark){:root{--bg:#14181e;--fg:#e8edf3;--mut:#9aa8b8;--acc:#7fb1ff;--card:#1d242d;--line:#2c3746}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:680px;margin:0 auto;padding:16px}
+h1{font-size:1.3rem;margin:0 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+.mut{color:var(--mut);font-size:.9rem}
+button{font:inherit;padding:9px 16px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
+button.pri{background:var(--acc);color:#fff;border-color:var(--acc)}
+input,textarea{width:100%;box-sizing:border-box;font:inherit;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);margin:8px 0}
+textarea{min-height:120px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}.bar i{display:block;height:100%;background:var(--acc)}
+.big{font-size:1.15rem}.timer{font-weight:700;color:var(--acc)}
+.sc{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.sc div{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center}
+.sc b{display:block;font-size:1.6rem;color:var(--acc)}
+table{width:100%;border-collapse:collapse;font-size:.9rem}td,th{border:1px solid var(--line);padding:6px;text-align:left;vertical-align:top}
+</style></head><body><main>
+<h1>Versant 4 Skills Essential: Mock Test</h1>
+<div id="app"></div>
+</main>
+<script>
+const T={
+A:['Repeat','Speaking','You will hear a sentence once. Repeat it exactly as you heard it. You have 15 seconds.'],
+B:['Sentence Builds','Speaking','You will hear three short phrases in random order. Say them as one correct sentence. You have 15 seconds.'],
+C:['Conversations','Listening','You will hear a short conversation and then a question. Answer with a single word or a short phrase. You have 10 seconds.'],
+D:['Sentence Completion','Reading','Type ONE word that best fits the gap. Spelling and capitalisation count. You have 25 seconds.'],
+E:['Dictation','Listening + Writing','You will hear a sentence once. Type it word for word, with correct spelling, capital letters and punctuation. You have 25 seconds.'],
+F:['Passage Reconstruction','Reading + Writing','Read the passage. It disappears after 30 seconds. Then rewrite it in your own words in complete sentences, with all the details you can. You have 90 seconds.']};
+const SEC={A:15,B:15,C:10,D:25,E:25};
+const D={
+A:["Please close the door.","I'll meet you at the station.","Could you explain why the shipment has been delayed?","We are planning to launch the product early next year.","The new manager will introduce herself at the meeting.","Please send me the updated schedule by noon.","The customer was satisfied with how quickly we resolved the issue.","She asked whether the presentation could be rescheduled to Monday.","Although the deadline was tight, the team delivered on time.","Employees who complete the training will receive a certificate.","If you had informed us earlier, we would have arranged transport.","The committee has postponed its decision until further notice.","Nobody expected the software update to take so long.","Regular feedback helps employees improve their performance steadily.","Despite the heavy traffic, he reached the venue before the guests arrived.","The company is looking for candidates with strong communication skills."],
+B:[[["on the table","she left","her keys"],["She left her keys on the table"]],[["was cancelled","because of the storm","the flight"],["The flight was cancelled because of the storm"]],[["every morning","our team","holds a short meeting"],["Our team holds a short meeting every morning"]],[["that we discussed","the proposal","has been approved"],["The proposal that we discussed has been approved"]],[["who called yesterday","the customer","wants a refund"],["The customer who called yesterday wants a refund"]],[["by the end of the week","the manager expects","all tasks to be completed"],["The manager expects all tasks to be completed by the end of the week","By the end of the week the manager expects all tasks to be completed"]],[["that arrived late","the parcel","was damaged"],["The parcel that arrived late was damaged"]],[["although it was raining","the event","went ahead as planned"],["Although it was raining the event went ahead as planned","The event went ahead as planned although it was raining"]]],
+C:[[["Are you joining the sales call at ten?","No, I have a dentist appointment. Could Meena go instead?"],"Why can't the woman join the call?",["dentist","appointment"]],
+[["Excuse me, is this the bus to the airport?","No, that's number twelve. This one goes to the railway station."],"Which bus goes to the airport?",["12","twelve"]],
+[["The printer has stopped working again.","I'll call IT. They promised to fix it by noon."],"Who will the woman call?",["it","i.t","tech","support"]],
+[["Shall we meet at the cafe or in the office?","The office is too noisy. Let's go to the cafe."],"Where will they meet?",["cafe","café"]],
+[["I need the budget report by Thursday, not Friday.","That's difficult. Finance sends their figures on Friday morning."],"Why is the deadline a problem for the woman?",["finance","figures","friday"]],
+[["Did you manage to book the conference room?","Only for the afternoon. The morning slot was already taken."],"When did the woman book the room for?",["afternoon"]],
+[["Your order will arrive in three to five working days.","That's too late. I need it before the weekend."],"What does the customer want?",["weekend","sooner","earlier"]],
+[["I heard you're moving to the Chennai branch.","Yes, from next month. I'll be leading a team of eight people."],"How many people will the woman lead?",["8","eight"]],
+[["Why was the training session cancelled?","The trainer fell ill, so it has been rescheduled for next Tuesday."],"When has the session been rescheduled?",["tuesday"]],
+[["Would you like to pay by card or cash?","Card, please. Actually, can I use this discount coupon first?"],"What does the woman ask about?",["coupon","discount"]],
+[["I'm worried about the client's feedback on the design.","Don't be. They said they liked it but want a different colour scheme."],"What does the client want to change?",["colour","color","scheme"]],
+[["The team missed the target by ten percent this quarter.","We should review our process before we blame anyone."],"What does the woman suggest doing?",["review","process"]]],
+D:[["We all worked hard to find a solution to the ___.",["problem","issue","challenge"]],["Please ___ your seat belt before the car starts moving.",["fasten","buckle"]],["The train was late, so I missed the beginning of the ___.",["meeting","film","movie","show","class","lecture","presentation","session","event","concert","game","match"]],["She has worked in this company ___ ten years.",["for"]],["He is very ___ and always helps his colleagues.",["helpful","kind","friendly","generous","supportive","polite"]],["I can't find my keys. Have you ___ them anywhere?",["seen"]],["The manager was ___ with the team's excellent results.",["pleased","happy","satisfied","impressed","delighted"]],["You must ___ the form and return it by Friday.",["sign","complete","fill","submit"]],["It is important to ___ customers politely, even when they are angry.",["treat","speak","answer","respond","talk","address","greet","serve","handle"]],["The company plans to ___ its services to more cities next year.",["expand","extend","offer","bring"]],["I would have called you if I ___ known about the problem.",["had"]],["Sales have increased ___ 20 percent since January.",["by"]],["Our flight was ___ because of heavy fog.",["delayed","cancelled","canceled","postponed","diverted"]],["He did not get the job because he lacked the necessary ___.",["experience","skills","qualifications","training","knowledge","education"]],["The instructions were so ___ that nobody understood them.",["confusing","unclear","complicated","complex","vague"]],["Neither the manager nor the employees ___ aware of the change.",["were"]],["Please keep this information ___. It should not be shared outside the team.",["confidential","private","secret"]],["After a long discussion, the committee finally ___ to approve the plan.",["agreed","decided","voted"]]],
+E:["The meeting starts at nine o'clock tomorrow.","Could you please send me the report by Friday?","Although it was raining, we walked to the office.","Our new colleague, Arjun, joined the team on Monday.","We can't finish the project without more time.","Please turn off your phones before the session begins.","The customer asked for a refund, but the shop refused.","Do you know when the next train to Madurai leaves?","It's important to arrive early, especially on the first day.","Our company provides training, support, and advice to small businesses.","She said she would call back after lunch.","Thank you for waiting. We will be with you shortly.","If you need any help, please contact the front desk.","The results were better than we had expected."],
+F:[["Anita was nervous on her first day at work. Her manager introduced her to the team and gave her a small task. She made a mistake in the report, but a colleague helped her fix it. By the end of the day, Anita felt much more confident.",[["anita"],["nervous","worried","anxious"],["first day"],["manager"],["mistake","error"],["colleague","coworker","co-worker"],["help"],["confident"]]],
+["The main printer broke down on Tuesday morning. Because an important client report was due at noon, Karan borrowed a printer from the next floor. The report was delivered on time, and his manager thanked him for solving the problem quickly.",[["printer"],["broke","broken","stopped","failed","not working"],["tuesday"],["client"],["report"],["noon","midday","12"],["karan"],["borrow"],["floor","upstairs"],["manager"],["thank"],["on time"]]]]};
+const seq=[];for(const p of 'ABCDEF')D[p].forEach((_,i)=>seq.push([p,i]));
+let n=0,ans=[],seen={},tm=null,sid=0,rec=null,mt=[],meta={};
+const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const fix=s=>s.replace(/[’‘]/g,"'").replace(/[“”]/g,'"').trim();
+const norm=s=>fix(s).toLowerCase().replace(/[^a-z0-9' ]/g,' ').split(/\s+/).filter(Boolean);
+const tok=s=>fix(s).match(/[A-Za-z0-9']+|[^\sA-Za-z0-9']/g)||[];
+function lcs(a,b){const d=Array(a.length+1).fill(0).map(()=>Array(b.length+1).fill(0));for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=a[i-1]===b[j-1]?d[i-1][j-1]+1:Math.max(d[i-1][j],d[i][j-1]);return d[a.length][b.length]}
+const rat=(a,b)=>lcs(a,b)/Math.max(a.length,b.length,1);
+function say(t,pitch,rate){return new Promise(r=>{const to=setTimeout(r,20000);try{const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.pitch=pitch||1;u.rate=rate||.95;u.onend=()=>{clearTimeout(to);r()};u.onerror=()=>{clearTimeout(to);r()};speechSynthesis.speak(u)}catch(e){clearTimeout(to);r()}})}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function audio(p,i){if(p==='A'||p==='E')await say(D[p][i],1,p==='E'?.9:.95);
+if(p==='B')for(const t of D.B[i][0]){await say(t);await wait(600)}
+if(p==='C'){const [l,q]=D.C[i];await say(l[0],.8);await say(l[1],1.3);await say('Question. '+q,1,.95)}}
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function mic(){if(!SR){$('note').textContent='Mic not supported here. Type your answer.';return}try{rec=new SR();rec.lang='en-US';rec.onspeechstart=()=>{meta.ts=Date.now()};rec.onspeechend=()=>{meta.te=Date.now()};rec.onresult=e=>{const r=e.results[0][0];meta.conf=r.confidence;meta.txt=r.transcript.trim();$('ans').value=r.transcript;$('note').textContent=''};rec.onerror=()=>{$('note').textContent='Mic unavailable. Type your answer.'};rec.start();$('note').textContent='Listening...'}catch(e){}}
+function intro(){$('app').innerHTML=`<div class="card"><p class="big">70 questions · about 30 minutes</p><p>Follows the official Versant 4 Skills Essential pattern: Repeat 16, Sentence Builds 8, Conversations 12, Sentence Completion 18, Dictation 14, Passage Reconstruction 2.</p><p class="mut">Scores are out of 80 (20 to 80). Each question is timed. Audio plays once. You can only move forward, and unfinished answers are saved as they are. No answers are shown until the end. Use headphones in a quiet room.</p><button class="pri" onclick="start()">Start test</button></div>`}
+function start(){n=0;ans=[];mt=[];meta={};seen={};show()}
+function bar(){return `<div class="bar"><i style="width:${Math.round(100*n/seq.length)}%"></i></div>`}
+function cd(t,f){$('tm').textContent=t;tm=setInterval(()=>{t--;$('tm').textContent=t;if(t<=0){clearInterval(tm);f()}},1000)}
+function show(){clearInterval(tm);speechSynthesis.cancel();try{rec&&rec.abort()}catch(e){}
+if(n>=seq.length)return finish();const my=++sid,[p,i]=seq[n],t=T[p];
+if(i===0&&!seen[p]){seen[p]=1;$('app').innerHTML=bar()+`<div class="card"><b>Part ${p}: ${t[0]}</b> <span class="mut">(${t[1]})</span><p>${t[2]}</p><button class="pri" onclick="show()">Continue</button></div>`;return}
+let h=bar()+`<div class="card"><b>Part ${p}: ${t[0]}</b> <span class="mut">· Question ${n+1} of ${seq.length}</span>`;
+if(p==='D')h+=`<p class="big">${esc(D.D[i][0])}</p><p>Time: <span class="timer" id="tm"></span>s</p><input id="ans" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="One word"><button class="pri" onclick="nx()">Next</button>`;
+else if(p==='F')h+=`<div id="fb"><p class="big">${esc(D.F[i][0])}</p><p>Passage disappears in: <span class="timer" id="tm"></span>s</p><button onclick="fw()">I'm ready</button></div>`;
+else{h+=`<p id="st" class="mut">Listen carefully...</p><p>Time: <span class="timer" id="tm">–</span>s</p>`+(p==='E'?`<textarea id="ans" autocomplete="off" spellcheck="false" placeholder="Type the sentence"></textarea>`:`<div class="row"><button onclick="mic()">🎤 Speak</button></div><input id="ans" autocomplete="off" placeholder="Speak, or type your answer"><div id="note" class="mut"></div>`)+`<button class="pri" onclick="nx()">Next</button>`}
+$('app').innerHTML=h+'</div>';
+if(p==='D'){cd(25,nx);$('ans').focus()}
+else if(p==='F')cd(30,fw);
+else(async()=>{await audio(p,i);if(sid!==my)return;$('st').textContent=p==='E'?'Type now':'Respond now';meta={t0:Date.now()};cd(SEC[p],nx);if(p==='E')$('ans').focus();else if(SR)mic()})()}
+function fw(){clearInterval(tm);sid++;$('fb').innerHTML=`<p class="mut">Rewrite the passage in your own words.</p><p>Time: <span class="timer" id="tm"></span>s</p><textarea id="ans" spellcheck="false"></textarea><button class="pri" onclick="nx()">Next</button>`;cd(90,nx);$('ans').focus()}
+function nx(){clearInterval(tm);sid++;speechSynthesis.cancel();try{rec&&rec.abort()}catch(e){}ans.push($('ans')?$('ans').value:'');mt.push(meta);meta={};n++;show()}
+function mech(v){const s=v.trim().split(/(?<=[.!?])\s+/).filter(Boolean);if(!s.length)return 0;return s.filter(x=>/^[A-Z]/.test(x)&&/[.!?]$/.test(x)).length/s.length}
+const cl=x=>Math.max(0,Math.min(1,x));
+const bag=(t,r)=>{const c=[...r];let k=0;t.forEach(w=>{const i=c.indexOf(w);if(i>-1){c.splice(i,1);k++}});return k/(t.length||1)};
+function flu(p,m,n){if(m.ts==null||m.te==null||!m.t0)return null;const lat=(m.ts-m.t0)/1000,lim=p==='A'?6:8,ls=lat<=lim?1:cl(1-(lat-lim)/lim),d=(m.te-m.ts)/1000;if(d<=.3)return ls;const w=n/d,rs=w>=1.5&&w<=3.5?1:w<1.5?cl(w/1.5):cl(1-(w-3.5)/2);return .5*ls+.5*rs}
+function sc(p,i,v,m){const x=D[p][i];m=m||{};
+if(p==='A'||p==='B'){const Ts=p==='A'?[norm(x)]:x[1].map(norm),w=norm(v),k=Ts.map(a=>rat(a,w)),b=k.indexOf(Math.max(...k)),ok=m.txt!=null&&m.txt.toLowerCase()===v.trim().toLowerCase();return{sm:k[b],vo:bag(Ts[b],w),fl:ok?flu(p,m,w.length):null,pr:ok&&m.conf?cl((m.conf-.5)/.4):null}}
+if(p==='C'){const w=norm(v),lo=v.toLowerCase();return{c:x[2].some(k=>w.includes(k)||(k.length>3&&lo.includes(k)))?1:0}}
+if(p==='D')return{d:x[1].includes(fix(v))?1:0};
+if(p==='E'){const a=tok(x),b=tok(v),pa=a.filter(t=>/^[^A-Za-z0-9']/.test(t)),pb=b.filter(t=>/^[^A-Za-z0-9']/.test(t));return{lis:bag(norm(x),norm(v)),sp:rat(norm(x),norm(v)),cap:bag(a.filter(t=>/^[A-Z]/.test(t)),b),pu:lcs(pa,pb)/Math.max(pa.length,pb.length,1)}}
+const lo=v.toLowerCase(),w=norm(v),cov=x[1].filter(g=>g.some(k=>lo.includes(k))).length/x[1].length,ln=cl(w.length/(.7*norm(x[0]).length)),ss=v.trim().split(/(?<=[.!?])\s+/).filter(Boolean),lk=ss.filter(z=>/\b(because|but|and|so|although|while|which|who|when|after|before|then|however)\b/i.test(z)).length/(ss.length||1);
+return{cov,con:cov*ln,mech:mech(v),va:.5*cl(new Set(w).size/(w.length||1)/.85)*ln+.5*cl(lk/.5)}}
+const K={
+Speaking:[['Sentence mastery (word order)','A, B','AB','sm',.3],['Vocabulary (words produced)','A, B','AB','vo',.2],['Fluency (start time, speech rate)','A, B (mic)','AB','fl',.25],['Pronunciation (mic clarity)','A, B (mic)','AB','pr',.25]],
+Listening:[['Understanding conversations','C','C','c',.5],['Understanding spoken sentences','E','E','lis',.5]],
+Reading:[['Vocabulary and grammar in context','D','D','d',.6],['Passage comprehension','F','F','cov',.4]],
+Writing:[['Spelling','E','E','sp',.2],['Capitalisation','E','E','cap',.15],['Punctuation','E','E','pu',.15],['Content and sequence','F','F','con',.2],['Capitals and full stops','F','F','mech',.1],['Vocabulary and sentence variety','F','F','va',.2]]};
+const band=o=>o<30?'A1':o<42?'A2':o<54?'B1':o<66?'B2':'C1';
+function finish(){const it={A:[],B:[],C:[],D:[],E:[],F:[]};let rv='';
+seq.forEach(([p,i],k)=>{const v=ans[k]||'',o=sc(p,i,v,mt[k]);it[p].push(o);const c=p==='A'||p==='E'?D[p][i]:p==='B'?D.B[i][1][0]:p==='C'?D.C[i][1]+' → '+D.C[i][2][0]:p==='D'?D.D[i][0]+' → '+D.D[i][1][0]:D.F[i][0];
+rv+=`<tr><td>${p}${i+1}</td><td>${esc(v||'(blank)')}</td><td>${esc(c)}</td><td>${Object.values(o).filter(z=>z!=null).map(z=>Math.round(z*100)+'%').join(' / ')}</td></tr>`});
+const av=(ps,key)=>{const z=ps.flatMap(p=>it[p].map(o=>o[key])).filter(z=>z!=null);return z.length?z.reduce((a,b)=>a+b,0)/z.length:null};
+const res={};let cards='',tot=0;
+for(const s in K){const rows=K[s].map(r=>({l:r[0],f:r[1],w:r[4],v:av(r[2].split(''),r[3])})),ok=rows.filter(r=>r.v!=null),pct=ok.reduce((a,r)=>a+r.v*r.w,0)/ok.reduce((a,r)=>a+r.w,0),sco=Math.round(20+60*pct);tot+=sco;
+cards+=`<div class="card"><b>${s}: ${sco} / 80</b> <span class="mut">(${band(sco)})</span><div style="overflow-x:auto"><table><tr><th>Sub-skill</th><th>From part</th><th>Score</th><th>Weight</th></tr>${rows.map(r=>`<tr><td>${r.l}</td><td>${r.f}</td><td>${r.v==null?'Not assessed (needs mic)':Math.round(r.v*100)+'%'}</td><td>${Math.round(r.w*100)}%</td></tr>`).join('')}</table></div></div>`}
+const O=Math.round(tot/4);
+$('app').innerHTML=`<div class="card"><p class="big">Test complete</p><div class="sc"><div>Overall<b>${O}</b>out of 80 · ${band(O)}</div></div><p class="mut">Skill scores range from 20 to 80. Overall is the average of Speaking, Listening, Reading and Writing. Levels are indicative only.</p></div>${cards}
+<div class="card"><p class="mut"><b>How scores are built.</b> Each skill combines sub-skills from the parts that test it, weighted as shown (weights are my own, since Pearson does not publish its model). Score = 20 + 60 × weighted percentage. Fluency (how soon you start and your speech rate) and pronunciation (the speech recogniser's confidence in what you said) are measured only when your answer came from the mic. If you typed your speaking answers, those two are skipped and Speaking uses the rest. Spelling, capitalisation and punctuation come from Dictation. Content, capitals and full stops, and vocabulary and sentence variety come from the two passages. This is an estimate, not an official Versant score.</p></div>
+<details class="card"><summary><b>Review all answers</b></summary><div style="overflow-x:auto"><table><tr><th>Q</th><th>Your answer</th><th>Correct / target</th><th>Sub-scores</th></tr>${rv}</table></div></details>
+<button class="pri" onclick="intro()">Take again</button>`}
+intro();
+</script></body></html>
